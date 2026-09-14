@@ -20,7 +20,7 @@
   };
 
   const SUGGEST_URL_FALLBACK =
-    "https://github.com/pantinarajesh/aidatacentermapping/issues/new?labels=data-update&title=Data%20update%3A%20";
+    "https://github.com/pantinarajesh/india-ai-datacenter-tracker/issues/new?labels=data-update&title=Data%20update%3A%20";
 
   const state = {
     facilities: [],

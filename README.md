@@ -4,7 +4,7 @@ An interactive map + directory tracking AI, GPU-cloud, and hyperscale data
 center projects being built and operated across India — who's building them,
 where, how big, and how far along.
 
-**[Live demo →](#)** _(add your deployed URL here once published)_
+**[Live demo →](https://pantinarajesh.github.io/india-ai-datacenter-tracker/)**
 
 ![status](https://img.shields.io/badge/status-active--tracking-brightgreen)
 

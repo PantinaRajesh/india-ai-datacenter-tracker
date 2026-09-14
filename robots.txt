@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pantinarajesh.github.io/india-ai-datacenter-tracker/sitemap.xml

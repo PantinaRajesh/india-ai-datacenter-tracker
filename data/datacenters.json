@@ -1,0 +1,907 @@
+{
+  "meta": {
+    "lastUpdated": "2026-09-14",
+    "notes": "Compiled from public company announcements, press releases, and news coverage (22 searches across ~15 outlets). This is a fast-moving sector — treat every figure as approximate and verify via the linked source before relying on it. Entries with no lat/lng are national/state-level programs or facilities whose exact site is undisclosed; they appear in the list and table but not as map pins.",
+    "suggestUpdateUrl": "https://github.com/pantinarajesh/aidatacentermapping/issues/new?labels=data-update&title=Data%20update"
+  },
+  "facilities": [
+    {
+      "id": "yotta-nm1-navi-mumbai",
+      "name": "NM1 — Shakti Cloud GPU Cluster",
+      "operator": "Yotta Data Services",
+      "parentGroup": "Hiranandani Group",
+      "city": "Navi Mumbai",
+      "state": "Maharashtra",
+      "lat": 19.0330,
+      "lng": 73.0297,
+      "status": "operational",
+      "type": "AI/GPU Cloud Data Center",
+      "capacityMW": 50,
+      "gpuCount": "8,192 Nvidia H100 + 1,024 Nvidia L40 live; roadmap to 80,000+ GPUs (B200/B300) by FY27-28",
+      "investmentDisplay": "Part of Yotta's broader multi-billion-dollar buildout (amount undisclosed)",
+      "announcedDate": "2023",
+      "expectedCompletion": "Expanding through FY27-28",
+      "partners": ["Nvidia (DGX Cloud Lepton)", "Gorilla Technology ($500M deal, 5,000+ GPUs)"],
+      "description": "India's first large-scale sovereign GPU cloud, offering Nvidia compute via the Shakti Cloud platform.",
+      "sources": [
+        { "title": "DCD — Yotta launches Nvidia GPU-based cloud in India", "url": "https://www.datacenterdynamics.com/en/news/yotta-data-services-launches-nvidia-gpu-based-cloud-in-india/" },
+        { "title": "Yotta — Shakti Cloud on Nvidia DGX Cloud Lepton", "url": "https://yotta.com/press-releases/yotta-and-nvidia-launch-shakti-cloud-on-dgx-cloud-lepton-to-power-indias-sovereign-ai-ambitions/" },
+        { "title": "CRN Asia — Gorilla to deploy 5,000+ GPUs for Yotta", "url": "https://www.crnasia.com/india/news/2026/gorilla-to-deploy-over-5-000-gpus-for-yotta-in-500-million-india-ai-infrastructure-deal" }
+      ]
+    },
+    {
+      "id": "yotta-d1-greater-noida",
+      "name": "D1 — Shakti Cloud (second tranche)",
+      "operator": "Yotta Data Services",
+      "parentGroup": "Hiranandani Group",
+      "city": "Greater Noida",
+      "state": "Uttar Pradesh",
+      "lat": 28.4744,
+      "lng": 77.5040,
+      "status": "under_construction",
+      "type": "AI/GPU Cloud Data Center",
+      "capacityMW": 28.8,
+      "gpuCount": "16,384 GPUs planned",
+      "announcedDate": "2025",
+      "expectedCompletion": "2026",
+      "partners": ["Nvidia"],
+      "description": "Second Shakti Cloud data center tranche expanding Yotta's national GPU footprint.",
+      "sources": [
+        { "title": "DCD — Yotta launches Nvidia GPU-based cloud in India", "url": "https://www.datacenterdynamics.com/en/news/yotta-data-services-launches-nvidia-gpu-based-cloud-in-india/" }
+      ]
+    },
+    {
+      "id": "adaniconnex-chennai",
+      "name": "Chennai Campus (Siruseri)",
+      "operator": "AdaniConneX",
+      "parentGroup": "Adani Group / EdgeConneX JV",
+      "city": "Chennai (Siruseri)",
+      "state": "Tamil Nadu",
+      "lat": 12.8406,
+      "lng": 80.2270,
+      "status": "operational",
+      "type": "Hyperscale Data Center",
+      "capacityMW": 33,
+      "investmentDisplay": "Part of Adani Group's $100B sovereign AI infrastructure commitment",
+      "expectedCompletion": "17MW live since Oct 2022; scaling to 33MW",
+      "partners": ["EdgeConneX"],
+      "sources": [
+        { "title": "AdaniConneX — Chennai data center", "url": "https://www.adaniconnex.com/data-centers/chennai" }
+      ]
+    },
+    {
+      "id": "adaniconnex-hyderabad",
+      "name": "Hyderabad Campus",
+      "operator": "AdaniConneX",
+      "parentGroup": "Adani Group / EdgeConneX JV",
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "lat": 17.3850,
+      "lng": 78.4867,
+      "status": "operational",
+      "type": "Hyperscale Data Center",
+      "capacityMW": 600,
+      "investmentDisplay": "Part of Adani Group's $100B sovereign AI infrastructure commitment",
+      "expectedCompletion": "Phase 1 live Oct 2024; scaling toward 600MW potential IT load",
+      "partners": ["EdgeConneX"],
+      "sources": [
+        { "title": "DataCenterHawk — AdaniConneX", "url": "https://datacenterhawk.com/marketplace/providers/adaniconnex" }
+      ]
+    },
+    {
+      "id": "adaniconnex-navimumbai",
+      "name": "Navi Mumbai Campus",
+      "operator": "AdaniConneX",
+      "parentGroup": "Adani Group / EdgeConneX JV",
+      "city": "Navi Mumbai",
+      "state": "Maharashtra",
+      "lat": 19.0330,
+      "lng": 73.0297,
+      "status": "under_construction",
+      "type": "Hyperscale Data Center",
+      "capacityMW": 1000,
+      "investmentDisplay": "Part of a Rs 50,000 crore (~$6B) Maharashtra MoU (2024)",
+      "announcedDate": "2024",
+      "expectedCompletion": "Availability from Dec 2026",
+      "partners": ["EdgeConneX"],
+      "sources": [
+        { "title": "DataCenterHawk — AdaniConneX", "url": "https://datacenterhawk.com/marketplace/providers/adaniconnex" },
+        { "title": "Adani Newsroom — Government of Maharashtra MoU", "url": "https://www.adani.com/newsroom/media-releases/government-of-maharashtra" }
+      ]
+    },
+    {
+      "id": "adaniconnex-noida",
+      "name": "Noida Campus",
+      "operator": "AdaniConneX",
+      "parentGroup": "Adani Group / EdgeConneX JV",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "lat": 28.5355,
+      "lng": 77.3910,
+      "status": "operational",
+      "type": "Hyperscale Data Center",
+      "capacityMW": 150,
+      "expectedCompletion": "Phase 1 live Jan 2025",
+      "partners": ["EdgeConneX"],
+      "sources": [
+        { "title": "DataCenterHawk — AdaniConneX", "url": "https://datacenterhawk.com/marketplace/providers/adaniconnex" }
+      ]
+    },
+    {
+      "id": "adaniconnex-pune",
+      "name": "Pune Campus",
+      "operator": "AdaniConneX",
+      "parentGroup": "Adani Group / EdgeConneX JV",
+      "city": "Pune",
+      "state": "Maharashtra",
+      "lat": 18.5204,
+      "lng": 73.8567,
+      "status": "under_construction",
+      "type": "Hyperscale Data Center",
+      "capacityMW": 250,
+      "investmentDisplay": "Part of the Maharashtra Rs 50,000 crore MoU",
+      "expectedCompletion": "Phase 1 targeted H2 2025/2026",
+      "partners": ["EdgeConneX"],
+      "sources": [
+        { "title": "DataCenterHawk — AdaniConneX", "url": "https://datacenterhawk.com/marketplace/providers/adaniconnex" }
+      ]
+    },
+    {
+      "id": "adani-google-visakhapatnam-aihub",
+      "name": "Visakhapatnam AI Hub (3 campuses)",
+      "operator": "Google Cloud",
+      "parentGroup": "Joint campus development with Adani Group",
+      "city": "Visakhapatnam",
+      "state": "Andhra Pradesh",
+      "lat": 17.6868,
+      "lng": 83.2185,
+      "status": "announced",
+      "type": "Gigawatt-scale AI Data Center Hub",
+      "investmentUSD": 15000000000,
+      "investmentDisplay": "$15B (Google, 2026–2030); Adani may invest up to $5B into the campus itself",
+      "announcedDate": "2026-04-28",
+      "expectedCompletion": "Construction to start ~early 2027; ~2.5 years to completion after that",
+      "partners": ["Google", "Adani Group"],
+      "description": "Google's first AI hub in India, spanning three campuses: Adivivaram (120 acres), Tarluvada (200 acres), and Rambilli-Achyutapuram (160 acres). Potentially gigawatt-scale, but exact final capacity is unconfirmed.",
+      "sources": [
+        { "title": "Google Blog — India's first AI hub, powered by a $15B investment", "url": "https://blog.google/intl/en-in/company-news/our-first-ai-hub-in-india-powered-by-a-15-billion-investment/" },
+        { "title": "DCD — Adani to invest up to $5bn in Google's Visakhapatnam campus", "url": "https://www.datacenterdynamics.com/en/news/indias-adani-group-set-to-invest-up-to-5bn-in-google-data-center-campus-in-visakhapatnam/" },
+        { "title": "Google Cloud Press Corner — groundbreaking", "url": "https://www.googlecloudpresscorner.com/2026-04-28-Google-Breaks-Ground-on-India-AI-Hub" }
+      ]
+    },
+    {
+      "id": "adani-sovereign-ai-100b-program",
+      "name": "$100B Sovereign AI Infrastructure Commitment",
+      "operator": "Adani Group",
+      "city": "",
+      "state": "Pan-India",
+      "status": "announced",
+      "type": "National Investment Program",
+      "investmentUSD": 100000000000,
+      "investmentDisplay": "$100B direct + $150B catalyzed ≈ $250B ecosystem",
+      "announcedDate": "2026-02-17",
+      "expectedCompletion": "Target: 5GW of AI data center capacity by 2035",
+      "partners": ["Google", "Microsoft"],
+      "description": "Group-wide pledge spanning the Visakhapatnam, Chennai, Hyderabad, Navi Mumbai, Noida and Pune AdaniConneX sites listed separately in this dataset. Reported capacity targets have shifted across statements (1GW by 2030, then 2GW, now 5GW by 2035) — likely the same evolving program rather than distinct commitments.",
+      "sources": [
+        { "title": "Adani Newsroom — Adani commits USD 100 Bn to sovereign AI infrastructure", "url": "https://www.adani.com/newsroom/media-releases/adani-commits-usd-100-bn-to-sovereign-ai-infrastructure" },
+        { "title": "TechCrunch — Adani pledges $100B for AI data centers", "url": "https://techcrunch.com/2026/02/17/adani-pledges-100b-for-ai-data-centers-as-india-seeks-bigger-role-in-global-ai/" }
+      ]
+    },
+    {
+      "id": "reliance-jio-nvidia-jamnagar",
+      "name": "Jamnagar AI Data Centre Campus",
+      "operator": "Reliance Intelligence / Jio",
+      "parentGroup": "Reliance Industries",
+      "city": "Jamnagar",
+      "state": "Gujarat",
+      "lat": 22.4707,
+      "lng": 70.0577,
+      "status": "under_construction",
+      "type": "AI/GPU Data Center",
+      "capacityMW": 120,
+      "gpuCount": "~75,000 H100-equivalent GB300 GPUs at launch, scaling to 200,000+; campus ultimately targeted up to 3GW",
+      "investmentDisplay": "Part of Reliance's $110B AI infrastructure commitment",
+      "announcedDate": "2025",
+      "expectedCompletion": "First 120MW segment targeted for end of 2026",
+      "partners": ["Nvidia (GB300 / Blackwell)"],
+      "sources": [
+        { "title": "Let's Data Science — Reliance Intelligence operationalises 120MW AI backbone", "url": "https://letsdatascience.com/news/reliance-intelligence-operationalises-120mw-ai-backbone-in-j-e028b01c" },
+        { "title": "DC Pulse — Reliance-Nvidia Jamnagar 3GW AI data center", "url": "https://dcpulse.com/project/reliance-nvidia-jamnagar-3gw-ai-data-center" },
+        { "title": "Swarajya — Nvidia partners with Reliance on 1GW data centre", "url": "https://swarajyamag.com/news-brief/nvidia-partners-with-reliance-in-indias-bold-push-for-ai-infrastructure-and-1gw-data-centre" }
+      ]
+    },
+    {
+      "id": "meta-reliance-jamnagar",
+      "name": "Jamnagar AI-enabled Data Center (Meta lease)",
+      "operator": "Reliance Industries (built) / Meta (leased)",
+      "city": "Jamnagar",
+      "state": "Gujarat",
+      "lat": 22.4707,
+      "lng": 70.0577,
+      "status": "announced",
+      "type": "AI Data Center",
+      "capacityMW": 168,
+      "announcedDate": "2026-06",
+      "expectedCompletion": "~2028 (about 2 years from June 2026 announcement)",
+      "partners": ["Meta", "Reliance Industries", "CleanMax / Fourth Partner Energy (renewables)"],
+      "description": "Meta's first AI data center deal in India, on Reliance-built capacity with options to scale further.",
+      "sources": [
+        { "title": "Meta Newsroom — Meta partners with Reliance on AI-enabled data center", "url": "https://about.fb.com/news/2026/06/meta-partners-with-reliance-on-ai-enabled-data-center-in-india/" },
+        { "title": "TechCrunch — Meta signs first AI data center deal in India", "url": "https://techcrunch.com/2026/06/10/meta-signs-first-ai-data-center-deal-in-india-with-reliance/" }
+      ]
+    },
+    {
+      "id": "tata-communications-ai-cloud",
+      "name": "AI Cloud Infrastructure (Nvidia Hopper GPU Supercomputer)",
+      "operator": "Tata Communications",
+      "city": "",
+      "state": "",
+      "status": "operational",
+      "type": "AI/GPU Cloud",
+      "gpuCount": "Tens of thousands of Nvidia Hopper GPUs (exact facility network undisclosed)",
+      "announcedDate": "2024",
+      "partners": ["Nvidia"],
+      "description": "Described as one of the largest Nvidia Hopper-based GPU supercomputers in India. Exact facility location(s) were not found in public sources — flagged as unknown pending confirmation.",
+      "sources": [
+        { "title": "Nvidia Newsroom — Tata partners with Nvidia on AI infrastructure", "url": "https://nvidianews.nvidia.com/news/tata-partners-with-nvidia-to-build-large-scale-ai-infrastructure" },
+        { "title": "Tata Communications — AI infrastructure with Nvidia", "url": "https://www.tatacommunications.com/press-release/tata-communications-unveils-ai-infrastructure-with-nvidia" }
+      ]
+    },
+    {
+      "id": "tcs-hypervault-hyderabad",
+      "name": "AI Data Centre Campus (264 acres)",
+      "operator": "TCS HyperVault",
+      "parentGroup": "Tata Consultancy Services",
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "lat": 17.3850,
+      "lng": 78.4867,
+      "status": "announced",
+      "type": "AI Data Center",
+      "investmentUSD": 8400000000,
+      "investmentDisplay": "Up to ₹70,000 crore (~$8.4B); TPG separately funding ~half of a related $2B project",
+      "announcedDate": "2026",
+      "expectedCompletion": "Phased buildout toward up to 1GW at full build-out",
+      "partners": ["TPG (financing)"],
+      "sources": [
+        { "title": "TCS Newsroom — TCS, HyperVault to establish AI data center campus", "url": "https://www.tcs.com/who-we-are/newsroom/press-release/tcs-hypervault-establish-large-scale-ai-data-center-campus-telangana" },
+        { "title": "Electrical Mirror — TCS HyperVault 1GW campus on 264 acres", "url": "https://electricalmirror.net/tcs-hypervault-to-develop-1gw-ai-data-centre-campus-on-264-acres-in-telangana/" },
+        { "title": "TechCrunch — TCS gets TPG to fund half of $2B AI data center project", "url": "https://techcrunch.com/2025/11/20/indias-tcs-gets-tpg-to-fund-half-of-2b-ai-data-center-project" }
+      ]
+    },
+    {
+      "id": "microsoft-azure-hyderabad",
+      "name": "India South Central Region",
+      "operator": "Microsoft Azure",
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "lat": 17.3850,
+      "lng": 78.4867,
+      "status": "operational",
+      "type": "Hyperscale Cloud Region",
+      "investmentDisplay": "Part of Microsoft's $17.5B India commitment (2026–2029)",
+      "announcedDate": "2026-08-06",
+      "expectedCompletion": "Generally available Aug 6, 2026; Microsoft's largest hyperscale region in India (3 availability zones)",
+      "partners": ["Adani", "Bajaj Finserv", "HDFC Bank (early customers)"],
+      "sources": [
+        { "title": "Microsoft Source Asia — Hyderabad datacenter region goes live", "url": "https://news.microsoft.com/source/asia/features/microsofts-newest-india-datacenter-region-goes-live-to-power-the-countrys-ai-economy-and-enable-frontier-firms/" },
+        { "title": "Business Standard — Microsoft launches Hyderabad data centre", "url": "https://www.business-standard.com/companies/news/microsoft-launches-hyderabad-data-centre-takes-india-cloud-regions-to-four-126080601850_1.html" }
+      ]
+    },
+    {
+      "id": "microsoft-azure-pune",
+      "name": "Pune Region",
+      "operator": "Microsoft Azure",
+      "city": "Pune",
+      "state": "Maharashtra",
+      "lat": 18.5204,
+      "lng": 73.8567,
+      "status": "operational",
+      "type": "Hyperscale Cloud Region",
+      "investmentDisplay": "Part of Microsoft's $17.5B India commitment (2026–2029)",
+      "sources": [
+        { "title": "Adani Newsroom — $100Bn sovereign AI infrastructure commitment", "url": "https://www.adani.com/newsroom/media-releases/adani-commits-usd-100-bn-to-sovereign-ai-infrastructure" },
+        { "title": "TechCrunch — Microsoft to invest $17.5B in India by 2029", "url": "https://techcrunch.com/2025/12/09/microsoft-to-invest-17-5b-in-india-by-2029-as-ai-race-accelerates" }
+      ]
+    },
+    {
+      "id": "aws-hyderabad",
+      "name": "AWS Region Expansion (Trainium AI chips)",
+      "operator": "Amazon Web Services",
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "lat": 17.3850,
+      "lng": 78.4867,
+      "status": "operational",
+      "type": "Hyperscale Cloud Region",
+      "investmentUSD": 1300000000,
+      "investmentDisplay": ">$1.3B invested by end of 2025; part of a $21B cloud/AI commitment (2026–2030)",
+      "partners": ["Telangana Government (workforce program)"],
+      "sources": [
+        { "title": "About Amazon India — AWS data centre in Hyderabad", "url": "https://www.aboutamazon.in/news/aws/aws-data-centre-hyderabad" },
+        { "title": "Swarajya — AWS breaks ground on new Hyderabad data centre", "url": "https://swarajyamag.com/news-brief/aws-breaks-ground-on-new-hyderabad-data-centre-reaffirms-over-21-billion-india-cloud-and-ai-infrastructure-investment-by-2030" }
+      ]
+    },
+    {
+      "id": "aws-mumbai",
+      "name": "Mumbai Region Expansion (Trainium AI chips)",
+      "operator": "Amazon Web Services",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "lat": 19.0760,
+      "lng": 72.8777,
+      "status": "operational",
+      "type": "Hyperscale Cloud Region",
+      "investmentDisplay": "Part of a $21B (incl. $13B AI-specific allocation) cloud/AI commitment through 2030",
+      "sources": [
+        { "title": "Tech News Hub — Amazon fuels India AI and cloud expansion", "url": "https://www.technewshub.co.uk/post/amazon-fuels-india-ai-and-cloud-expansion-with-additional-13-billion-aws-data-center-push" }
+      ]
+    },
+    {
+      "id": "ctrls-national-expansion",
+      "name": "National Hyperscale Campus Expansion",
+      "operator": "CtrlS Datacenters",
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "lat": 17.3850,
+      "lng": 78.4867,
+      "status": "operational",
+      "type": "Hyperscale Data Center Network",
+      "capacityMW": 350,
+      "investmentUSD": 741000000,
+      "investmentDisplay": "$2B six-year plan; plus CPP Investments ₹7,000cr (~$741M) for an 8.2% stake and JV",
+      "announcedDate": "2026-06",
+      "partners": ["CPP Investments (Canada Pension Plan)"],
+      "description": "Operates 15+ data centers nationally (HQ Hyderabad, plus Mumbai, Chennai, Noida, Bengaluru and more); the map pin represents the HQ, not a single site. Adding 350MW of capacity over six years.",
+      "sources": [
+        { "title": "CRN Asia — CPP Investments commits $741M to CtrlS", "url": "https://www.crnasia.com/india/news/2026/cpp-investments-commits-741m-to-indian-data-center-operator-ctrls-to-ride-ai-infrastructure-wave" },
+        { "title": "TechCrunch — Canadian pension giant joins race to fund India's AI data center boom", "url": "https://techcrunch.com/2026/06/17/canadian-pension-giant-joins-race-to-fund-indias-ai-fueled-data-center-boom/" }
+      ]
+    },
+    {
+      "id": "ntt-neysa-hyderabad",
+      "name": "AI Data Centre Cluster",
+      "operator": "NTT DATA + Neysa Networks",
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "lat": 17.3850,
+      "lng": 78.4867,
+      "status": "announced",
+      "type": "AI/GPU Data Center",
+      "capacityMW": 400,
+      "gpuCount": "25,000 GPUs planned",
+      "investmentUSD": 1200000000,
+      "investmentDisplay": "₹10,500 crore (~$1.2B)",
+      "announcedDate": "2025-04",
+      "expectedCompletion": "Buildout through 2026 and beyond; up to 500MW with a renewables mix",
+      "partners": ["Telangana Government", "Neysa Networks"],
+      "sources": [
+        { "title": "Inc42 — NTT DATA, Neysa to build ₹10,500 cr AI data centre in Hyderabad", "url": "https://inc42.com/buzz/ntt-data-neysa-to-build-inr-10500-cr-ai-data-centre-in-hyderabad/" },
+        { "title": "Structure Research — NTT, Neysa Networks to build AI data centre", "url": "https://www.structureresearch.net/2025/05/01/ntt-neysa-networks-to-build-ai-data-centre-in-hyderabad-for-gpu-cloud/" }
+      ]
+    },
+    {
+      "id": "ntt-netmagic-mumbai",
+      "name": "Mumbai Data Centers",
+      "operator": "NTT Global Data Centers (Netmagic)",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "lat": 19.0760,
+      "lng": 72.8777,
+      "status": "operational",
+      "type": "Data Center",
+      "partners": ["MeitY (IndiaAI Mission empanelled)"],
+      "sources": [
+        { "title": "NTT — Mumbai data centers", "url": "https://services.global.ntt/en-us/services-and-products/global-data-centers/global-locations/india/mumbai-data-centers" }
+      ]
+    },
+    {
+      "id": "neysa-networks-ai-hubs",
+      "name": "Mumbai & Hyderabad AI GPU Hubs",
+      "operator": "Neysa Networks",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "lat": 19.0760,
+      "lng": 72.8777,
+      "status": "operational",
+      "type": "AI/GPU Cloud",
+      "gpuCount": "20,000+ GPUs deployed (company claims ~30% of India's high-end AI compute)",
+      "investmentUSD": 1200000000,
+      "investmentDisplay": "$1.2B raise, Blackstone-led; reached unicorn status Feb 2026",
+      "partners": ["Blackstone"],
+      "description": "Operates GPU hubs across both Mumbai and Hyderabad; pin represents Mumbai.",
+      "sources": [
+        { "title": "FounderPin — Neysa startup story", "url": "https://founderpin.com/startup_story/neysa/" }
+      ]
+    },
+    {
+      "id": "stt-gdc-chennai-siruseri",
+      "name": "Siruseri Campus",
+      "operator": "STT GDC India",
+      "city": "Chennai (Siruseri, SIPCOT)",
+      "state": "Tamil Nadu",
+      "lat": 12.8406,
+      "lng": 80.2270,
+      "status": "operational",
+      "type": "AI-ready Data Center",
+      "capacityMW": 45,
+      "investmentDisplay": "Part of a ₹4,200 crore (~$500M) Tamil Nadu commitment",
+      "announcedDate": "2026-02",
+      "partners": ["Government of Tamil Nadu"],
+      "description": "Sources disagree on Phase 1 sizing (7.2MW vs. 36MW cited in different articles); 45MW is the stated full AI-ready campus target.",
+      "sources": [
+        { "title": "CRN Asia — STT GDC launches 45MW AI-ready Chennai facility", "url": "https://www.crnasia.com/india/news/2026/stt-gdc-launches-45-mw-ai-ready-chennai-facility-commits-4-200-crore-investment" },
+        { "title": "DCD — STT GDC India launches data center in Chennai", "url": "https://www.datacenterdynamics.com/en/news/stt-gdc-india-launches-data-center-in-chennai-targets-potential-ipo/" }
+      ]
+    },
+    {
+      "id": "stt-gdc-chennai-ambattur",
+      "name": "Ambattur Campus",
+      "operator": "STT GDC India",
+      "city": "Chennai (Ambattur)",
+      "state": "Tamil Nadu",
+      "lat": 13.1143,
+      "lng": 80.1548,
+      "status": "operational",
+      "type": "Data Center",
+      "capacityMW": 40,
+      "investmentDisplay": "Part of the ₹4,200 crore Tamil Nadu commitment",
+      "partners": ["Government of Tamil Nadu"],
+      "sources": [
+        { "title": "CRN Asia — STT GDC launches 45MW AI-ready Chennai facility", "url": "https://www.crnasia.com/india/news/2026/stt-gdc-launches-45-mw-ai-ready-chennai-facility-commits-4-200-crore-investment" }
+      ]
+    },
+    {
+      "id": "stt-gdc-expansion-pipeline",
+      "name": "Expansion Pipeline (Mumbai, Noida, Pune, Jaipur, Hyderabad, Bengaluru)",
+      "operator": "STT GDC India",
+      "city": "",
+      "state": "Multi-state",
+      "status": "planned",
+      "type": "Data Center Network",
+      "partners": ["Karnataka Government", "Maharashtra Government", "Telangana Government", "Uttar Pradesh Government (MoUs)"],
+      "sources": [
+        { "title": "CRN Asia — STT GDC launches 45MW AI-ready Chennai facility", "url": "https://www.crnasia.com/india/news/2026/stt-gdc-launches-45-mw-ai-ready-chennai-facility-commits-4-200-crore-investment" }
+      ]
+    },
+    {
+      "id": "airtel-nxtra-national",
+      "name": "National AI-ready Capacity Buildout",
+      "operator": "Bharti Airtel (Nxtra)",
+      "city": "",
+      "state": "Pan-India",
+      "status": "operational",
+      "type": "Data Center Network",
+      "capacityMW": 300,
+      "investmentUSD": 1000000000,
+      "investmentDisplay": "$1B raise (Mar 2026): Alpha Wave Global $435M, Carlyle $240M, Anchorage Capital $35M, plus Airtel",
+      "announcedDate": "2026-03",
+      "expectedCompletion": "Target: 1GW within the next few years (from ~250–300MW today)",
+      "partners": ["Alpha Wave Global", "Carlyle", "Anchorage Capital"],
+      "description": "14 hyperscale plus 120+ edge data centers nationally, including a notable Chennai expansion (38MW facility, third DC in the city; 46MW across four Chennai sites).",
+      "sources": [
+        { "title": "CRN Asia — Airtel raises $1 billion for Nxtra", "url": "https://www.crnasia.com/india/news/2026/airtel-raises-1-billion-for-nxtra-to-scale-ai-ready-data-centre-capacity-to-1-gw" },
+        { "title": "Airtel Press Release — $1B investment in Nxtra", "url": "https://www.airtel.in/press-release/03-2026/airtel-announces-us1-billion-investment-in-nxtra-led-by-alpha-wave-global-and-existing-investor-carlyle-bharti-airtel-will-also-participate/" }
+      ]
+    },
+    {
+      "id": "sify-navimumbai",
+      "name": "Navi Mumbai AI-ready Data Center",
+      "operator": "Sify Technologies (Sify Infinit Spaces)",
+      "city": "Navi Mumbai",
+      "state": "Maharashtra",
+      "lat": 19.0330,
+      "lng": 73.0297,
+      "status": "operational",
+      "type": "AI-ready Data Center",
+      "investmentUSD": 5000000000,
+      "investmentDisplay": "$5B national expansion plan; IFC sustainability-linked loan for a 103MW AI-ready project",
+      "partners": ["Nvidia (DGX-Ready certification)", "IFC"],
+      "description": "Part of a 129MW operational national portfolio (Mar 2026) spanning Navi Mumbai and Chennai; Nvidia DGX-Ready certified up to 130kW/rack.",
+      "sources": [
+        { "title": "DCD — Sify to invest $5bn in Indian AI data center expansion", "url": "https://www.datacenterdynamics.com/en/news/sify-technologies-to-invest-5bn-in-indian-ai-data-center-expansion/" },
+        { "title": "IFC — IFC partners with Sify", "url": "https://www.ifc.org/en/pressroom/2026/ifc-partners-with-sify-to-support-expansion-of-data-centers-and-strengthen-digital" }
+      ]
+    },
+    {
+      "id": "sify-noida",
+      "name": "Noida Data Center (Nvidia DGX-Ready)",
+      "operator": "Sify Technologies",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "lat": 28.5355,
+      "lng": 77.3910,
+      "status": "operational",
+      "type": "AI-ready Data Center",
+      "partners": ["Nvidia"],
+      "description": "Nvidia DGX-Ready certified for liquid cooling, up to 130kW per rack.",
+      "sources": [
+        { "title": "Sify — First in India to achieve Nvidia DGX-Ready certification", "url": "https://www.sifytechnologies.com/news/sify-becomes-first-in-india-to-achieve-nvidia-dgx-ready-data-center-certification-for-liquid-cooling-to-enable-breakthrough-ai-performance/" }
+      ]
+    },
+    {
+      "id": "esds-nashik",
+      "name": "Nashik Data Center (HQ)",
+      "operator": "ESDS Software Solution",
+      "city": "Nashik",
+      "state": "Maharashtra",
+      "lat": 19.9975,
+      "lng": 73.7898,
+      "status": "operational",
+      "type": "Data Center",
+      "partners": ["Sharon AI (international capacity deal; GPUs hosted in Australia, not India)"],
+      "description": "HQ site of a 5-DC national network (Navi Mumbai, Bengaluru, Mohali, Noida, Nashik), with Kolkata and Ghaziabad upcoming. Listed on stock exchange Sep 4, 2026; ~₹720 crore IPO proceeds earmarked for expansion.",
+      "sources": [
+        { "title": "DCD — ESDS targets ₹720 crore IPO", "url": "https://www.datacenterdynamics.com/en/news/esds-software-solution-targets-rs-720-crore-ipo-will-use-proceeds-to-expand-data-center-footprint/" },
+        { "title": "Tracxn — ESDS company profile", "url": "https://tracxn.com/d/companies/esds/" }
+      ]
+    },
+    {
+      "id": "e2e-networks-chennai",
+      "name": "Chennai Data Center (Nvidia B200 Cluster)",
+      "operator": "E2E Networks",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "lat": 13.0827,
+      "lng": 80.2707,
+      "status": "operational",
+      "type": "AI/GPU Cloud Data Center",
+      "gpuCount": "1,024 Nvidia B200 GPUs, 184TB GPU RAM",
+      "investmentUSD": 120000000,
+      "investmentDisplay": "~₹1,000 crore (~$120M) binding term sheet through June 2029",
+      "announcedDate": "2026",
+      "partners": ["Nvidia"],
+      "sources": [
+        { "title": "DCD — E2E Networks acquires 1,024 Nvidia B200 GPU cluster", "url": "https://www.datacenterdynamics.com/en/news/e2e-networks-acquires-1024-nvidia-b200-gpu-cluster-for-chennai-data-center/" },
+        { "title": "Bloomberg — Nvidia boosts India AI buildout", "url": "https://www.bloomberg.com/news/articles/2026-02-18/nvidia-boosts-india-ai-buildout-as-e2e-yotta-get-advanced-gpus" }
+      ]
+    },
+    {
+      "id": "e2e-networks-multicity",
+      "name": "Delhi NCR, Mumbai & Bengaluru GPU Cloud DCs",
+      "operator": "E2E Networks",
+      "city": "",
+      "state": "Multi-state",
+      "status": "operational",
+      "type": "AI/GPU Cloud",
+      "gpuCount": "Nvidia B200, H200, H100, A100, L40S, A30, L4",
+      "sources": [
+        { "title": "E2E Networks", "url": "https://www.e2enetworks.com/" }
+      ]
+    },
+    {
+      "id": "colt-dcs-rmz-navimumbai",
+      "name": "Navi Mumbai Campus",
+      "operator": "Colt DCS + RMZ Digital Infrastructure (JV)",
+      "city": "Navi Mumbai",
+      "state": "Maharashtra",
+      "lat": 19.0330,
+      "lng": 73.0297,
+      "status": "under_construction",
+      "type": "Hyperscale Data Center",
+      "capacityMW": 134,
+      "investmentUSD": 1700000000,
+      "investmentDisplay": "$1.7B JV (Colt DCS + RMZ, 50/50) over 3–5 years",
+      "announcedDate": "2023",
+      "expectedCompletion": "Phase 1 launched Sept 2023; full 134MW completion ongoing",
+      "partners": ["RMZ Digital Infrastructure Partners"],
+      "sources": [
+        { "title": "Mingtiandi — Colt DCS forms $1.7B India data centre JV with RMZ", "url": "https://www.mingtiandi.com/real-estate/data-centres/colt-dcs-forms-1-7b-india-data-centre-jv-with-rmz/" },
+        { "title": "Business Wire — Colt DCS / RMZ JV", "url": "https://www.businesswire.com/news/home/20241119231049/en/" }
+      ]
+    },
+    {
+      "id": "colt-dcs-rmz-chennai",
+      "name": "Ambattur Campus",
+      "operator": "Colt DCS + RMZ Digital Infrastructure (JV)",
+      "city": "Chennai (Ambattur)",
+      "state": "Tamil Nadu",
+      "lat": 13.1143,
+      "lng": 80.1548,
+      "status": "under_construction",
+      "type": "Hyperscale Data Center",
+      "capacityMW": 72,
+      "investmentDisplay": "Part of the $1.7B Colt DCS + RMZ JV",
+      "partners": ["RMZ Digital Infrastructure Partners"],
+      "sources": [
+        { "title": "Capacity Media — Colt DCS plans new data centre in Chennai", "url": "https://capacityglobal.com/news/colt-dcs-plans-new-data-centre-in-chennai-india/" }
+      ]
+    },
+    {
+      "id": "webwerks-ironmountain-delhincr",
+      "name": "Delhi NCR AI-powered Data Center (~100,000 sq ft)",
+      "operator": "Web Werks (Iron Mountain)",
+      "city": "Delhi NCR",
+      "state": "Haryana / NCR",
+      "lat": 28.4595,
+      "lng": 77.0266,
+      "status": "operational",
+      "type": "AI-ready Data Center",
+      "investmentUSD": 900000000,
+      "investmentDisplay": "~₹7,500 crore (~$900M) Web Werks–Iron Mountain JV/expansion plan",
+      "announcedDate": "2026",
+      "partners": ["Iron Mountain (full acquisition completed)"],
+      "description": "Part of a national network across Mumbai, Bengaluru, Chennai, Hyderabad and Noida; current footprint ~40MW, scaling to a 200MW national target.",
+      "sources": [
+        { "title": "Web Werks — Web Werks-Iron Mountain to set up data centres across India's major cities", "url": "https://www.webwerks.in/web-werks-iron-mountain-set-data-centres-indias-major-cities-2026" },
+        { "title": "IoT For All — Web Werks Delhi NCR", "url": "https://www.iotforall.com/news/press-web-werks-delhi-ncr" }
+      ]
+    },
+    {
+      "id": "pdg-mumbai-mu1",
+      "name": "MU1 Mumbai Campus",
+      "operator": "Princeton Digital Group",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "lat": 19.0760,
+      "lng": 72.8777,
+      "status": "under_construction",
+      "type": "Hyperscale Data Center",
+      "capacityMW": 150,
+      "investmentDisplay": "Part of a $1B India program (within a $5B Asia AI-ready program)",
+      "expectedCompletion": "Tripling to 150MW across 3 new buildings; first 100MW phase in 2026",
+      "partners": ["Tata Power (solar PPA)"],
+      "sources": [
+        { "title": "PDG Newsroom — Major India expansion to 230MW in Mumbai and Chennai", "url": "https://princetondg.com/newsroom/princeton-digital-group-unveils-major-india-expansion-taking-total-capacity-to-230-mw-in-mumbai-and-chennai/" },
+        { "title": "DCD — PDG announces $1bn India expansion", "url": "https://www.datacenterdynamics.com/en/news/pdg-announces-1bn-india-expansion-in-mumbai-and-chennai/" }
+      ]
+    },
+    {
+      "id": "pdg-chennai-ch1",
+      "name": "CH1 Chennai Campus",
+      "operator": "Princeton Digital Group",
+      "city": "Chennai (northern Chennai Metro Area)",
+      "state": "Tamil Nadu",
+      "lat": 13.0827,
+      "lng": 80.2707,
+      "status": "under_construction",
+      "type": "AI-ready Data Center",
+      "capacityMW": 72,
+      "investmentDisplay": "Part of PDG's $1B India program",
+      "sources": [
+        { "title": "PDG — India locations", "url": "https://princetondg.com/locations/india/" }
+      ]
+    },
+    {
+      "id": "equinix-chennai-cn1",
+      "name": "CN1 — First AI-ready IBX in Chennai",
+      "operator": "Equinix",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "lat": 13.0827,
+      "lng": 80.2707,
+      "status": "operational",
+      "type": "AI-ready Data Center",
+      "investmentUSD": 69000000,
+      "investmentDisplay": "$69M initial investment",
+      "description": "800 cabinets in Phase 1, scaling to 4,250 cabinets.",
+      "sources": [
+        { "title": "PR Newswire — Equinix opens first AI-ready data center in Chennai", "url": "https://www.prnewswire.com/news-releases/equinix-opens-first-ai-ready-data-center-in-chennai-302561191.html" }
+      ]
+    },
+    {
+      "id": "equinix-mumbai-mb3",
+      "name": "MB3 — Fourth Mumbai Data Center",
+      "operator": "Equinix",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "lat": 19.0760,
+      "lng": 72.8777,
+      "status": "operational",
+      "type": "Data Center",
+      "announcedDate": "2026-04",
+      "description": "Part of a combined 4,725+ cabinet Mumbai + Chennai footprint.",
+      "sources": [
+        { "title": "Equinix Newsroom — Equinix launches purpose-built IBX in Mumbai", "url": "https://newsroom.equinix.com/2026-04-08-Equinix-Launches-Purpose-Built-IBX-Data-Center-in-Mumbai-to-Accelerate-Indias-AI-and-Cloud-Growth" },
+        { "title": "The Fast Mode — Equinix opens fourth Mumbai data center", "url": "https://www.thefastmode.com/technology-solutions/48035-equinix-opens-fourth-mumbai-data-center-mb3-to-support-ai-hybrid-cloud-demand" }
+      ]
+    },
+    {
+      "id": "airtrunk-lumina-portfolio",
+      "name": "Lumina CloudInfra Portfolio (Mumbai, Chennai, Hyderabad, Pune)",
+      "operator": "AirTrunk",
+      "city": "",
+      "state": "Multi-state",
+      "status": "planned",
+      "type": "Data Center Portfolio",
+      "capacityMW": 600,
+      "investmentUSD": 5000000000,
+      "investmentDisplay": "Up to $5B future development potential (acquisition price undisclosed)",
+      "announcedDate": "2026-04",
+      "partners": ["Lumina CloudInfra (acquired)"],
+      "sources": [
+        { "title": "Forbes — AirTrunk expands in India with Lumina CloudInfra deal", "url": "https://www.forbes.com/sites/yessarrosendar/2026/04/21/billionaire-robin-khudas-airtrunk-expands-in-india-with-lumina-cloudinfra-deal/" },
+        { "title": "DCD — AirTrunk enters India, acquires Lumina CloudInfra", "url": "https://www.datacenterdynamics.com/en/news/apac-data-center-firm-airtrunk-enters-india-acquires-lumina-cloudinfra/" }
+      ]
+    },
+    {
+      "id": "nxtgen-bengaluru-bidadi",
+      "name": "Bidadi Flagship Campus + AI Factory",
+      "operator": "NxtGen Datacenter and Cloud Technologies",
+      "city": "Bengaluru (Bidadi)",
+      "state": "Karnataka",
+      "lat": 12.7980,
+      "lng": 77.3931,
+      "status": "operational",
+      "type": "AI/GPU Cloud Data Center",
+      "gpuCount": "1,000+ GPUs currently (Nvidia L40S, H100, H200 diamond-cooled); plan for 12,000 GPUs",
+      "investmentUSD": 430000000,
+      "investmentDisplay": "$400M planned GPU investment; ₹3,600 crore (~$430M) sovereign AI factory",
+      "partners": ["Dell Technologies", "Nvidia", "CommScope", "Vertiv", "Akash Systems"],
+      "sources": [
+        { "title": "BW Businessworld — NxtGen to expand AI infra with $400M GPU investment", "url": "https://www.businessworld.in/article/nxtgen-cloud-technologies-to-expand-ai-infra-with-400-mn-gpu-investment-549950" },
+        { "title": "DCD — NxtGen AI adopts diamond-cooled GPU servers", "url": "https://www.datacenterdynamics.com/en/news/indian-cloud-provider-nxtgen-ai-adopts-diamond-cooled-gpu-servers/" }
+      ]
+    },
+    {
+      "id": "hcltech-sarvam-bhubaneswar",
+      "name": "Odisha Sovereign AI Park",
+      "operator": "HCLTech",
+      "city": "Bhubaneswar",
+      "state": "Odisha",
+      "lat": 20.2961,
+      "lng": 85.8245,
+      "status": "announced",
+      "type": "AI Data Center + Global Tech Centre",
+      "investmentUSD": 1600000000,
+      "investmentDisplay": "₹14,257–15,000 crore (~$1.6B)",
+      "announcedDate": "2026-07",
+      "expectedCompletion": "Global Tech Centre operational by 2028",
+      "partners": ["Sarvam AI", "Government of Odisha"],
+      "sources": [
+        { "title": "HCLTech — HCLTech announces AI data center in Bhubaneswar", "url": "https://www.hcltech.com/en-us/press-releases/hcltech-announces-ai-data-center-bhubaneswar-partnership-sarvam-and-government" },
+        { "title": "CRN Asia — HCLTech builds AI ecosystem in Odisha", "url": "https://www.crnasia.com/india/news/2026/hcltech-builds-ai-ecosystem-in-odisha-with-its-first-data-centre-and-global-technology-hub" }
+      ]
+    },
+    {
+      "id": "lt-nvidia-chennai",
+      "name": "300-acre Gigawatt-scalable AI Campus",
+      "operator": "Larsen & Toubro",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "lat": 13.0827,
+      "lng": 80.2707,
+      "status": "under_construction",
+      "type": "AI Data Center",
+      "capacityMW": 30,
+      "investmentDisplay": "Undisclosed (industry benchmark suggests ~$9–10B for a 250MW gigawatt-scale campus)",
+      "announcedDate": "2026-02",
+      "partners": ["Nvidia"],
+      "sources": [
+        { "title": "L&T Press Release — L&T teaming with Nvidia to build gigawatt-scale AI factory", "url": "https://www.larsentoubro.com/pressreleases/2026/2026-02-18-lt-teaming-with-nvidia-to-build-india-s-largest-gigawatt-scale-ai-factory" },
+        { "title": "Inc42 — L&T, Nvidia join forces on gigawatt-scale AI data centre", "url": "https://inc42.com/buzz/lt-nvidia-join-forces-to-build-gigawatt-scale-ai-data-centre-in-india/" }
+      ]
+    },
+    {
+      "id": "lt-nvidia-mumbai",
+      "name": "AI Data Center (under execution)",
+      "operator": "Larsen & Toubro",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "lat": 19.0760,
+      "lng": 72.8777,
+      "status": "under_construction",
+      "type": "AI Data Center",
+      "capacityMW": 40,
+      "announcedDate": "2026",
+      "partners": ["Nvidia"],
+      "sources": [
+        { "title": "L&T Press Release — L&T teaming with Nvidia to build gigawatt-scale AI factory", "url": "https://www.larsentoubro.com/pressreleases/2026/2026-02-18-lt-teaming-with-nvidia-to-build-india-s-largest-gigawatt-scale-ai-factory" }
+      ]
+    },
+    {
+      "id": "lt-vyoma-dholera",
+      "name": "Dholera SIR Green Data Center",
+      "operator": "L&T Vyoma",
+      "city": "Dholera SIR",
+      "state": "Gujarat",
+      "lat": 22.2358,
+      "lng": 72.1955,
+      "status": "announced",
+      "type": "Green Data Center",
+      "capacityMW": 250,
+      "investmentUSD": 3000000000,
+      "investmentDisplay": "₹25,000 crore (~$3B)",
+      "expectedCompletion": "Operations expected by 2028",
+      "partners": ["Government of Gujarat"],
+      "sources": [
+        { "title": "News On Air — Gujarat signs agreement with L&T Vyoma", "url": "https://www.newsonair.gov.in/gujarat-signs-agreement-with-larsen-toubro-vyoma-to-build-ai-data-center-in-dholera" }
+      ]
+    },
+    {
+      "id": "lt-together-ai-chennai",
+      "name": "10,000-GPU Unified AI Cluster (Together AI)",
+      "operator": "Larsen & Toubro",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "lat": 13.0827,
+      "lng": 80.2707,
+      "status": "operational",
+      "type": "AI/GPU Cluster",
+      "gpuCount": "10,000 GPUs",
+      "announcedDate": "2026-08",
+      "partners": ["Together AI"],
+      "description": "Described by L&T as India's first unified GPU cluster of this scale.",
+      "sources": [
+        { "title": "Tech Times — L&T deploys India's first 10,000-GPU unified AI cluster", "url": "https://www.techtimes.com/articles/324334/20260813/lt-deploys-indias-first-10000-gpu-unified-ai-cluster-together-ai-chennai.htm" }
+      ]
+    },
+    {
+      "id": "ola-krutrim-bengaluru",
+      "name": "Krutrim AI Compute Clusters",
+      "operator": "Ola Krutrim",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "lat": 12.9716,
+      "lng": 77.5946,
+      "status": "operational",
+      "type": "AI/GPU Cloud",
+      "gpuCount": "Nvidia GPU clusters reported as GB200/NVL72-class (underlying chip generation unconfirmed — see notes)",
+      "investmentDisplay": "₹2,000+ crore invested to date; ₹10,000 crore planned over the next year",
+      "expectedCompletion": "Scaling toward 1GW capacity by 2028",
+      "partners": ["Nvidia"],
+      "description": "Coordinates reflect Krutrim's Bengaluru HQ; the exact physical cluster site was not independently confirmed. Some reporting describes these clusters as A100/H100-based while naming them after Blackwell-generation GB200/NVL72 products — this inconsistency is unresolved.",
+      "sources": [
+        { "title": "DCD — India's Krutrim plans three chips and 1GW cloud expansion", "url": "https://www.datacenterdynamics.com/en/news/indias-krutrim-plans-three-chips-and-1gw-cloud-expansion-from-2026/" },
+        { "title": "Outlook Business — Ola Krutrim to invest ₹10,000 crore", "url": "https://www.outlookbusiness.com/news/ola-krutrim-to-invest-rs-10000-crore-in-krutrim-ai-over-next-one-year" }
+      ]
+    },
+    {
+      "id": "cyfuture-noida",
+      "name": "Liquid-Cooled AI Data Center (10MW, \"Vera Rubin-ready\")",
+      "operator": "Cyfuture (Cyfuture AI / Cyfuture Cloud)",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "lat": 28.5355,
+      "lng": 77.3910,
+      "status": "under_construction",
+      "type": "AI Data Center",
+      "capacityMW": 10,
+      "expectedCompletion": "Going live Oct 31, 2026",
+      "partners": ["MeitY (empanelled)"],
+      "description": "Direct-to-chip liquid cooling facility; part of a wider network also spanning Jaipur, Raipur and Bengaluru.",
+      "sources": [
+        { "title": "OpenPR — Cyfuture Cloud unveils India's premier 10MW liquid-cooled AI facility", "url": "https://www.openpr.com/news/4533304/cyfuture-cloud-unveils-india-s-premier-10mw-liquid-cooled-ai" },
+        { "title": "Cyfuture — Data centers", "url": "https://cyfuture.ai/data-centers" }
+      ]
+    },
+    {
+      "id": "indiaai-mission-national-gpu-pool",
+      "name": "IndiaAI Mission — National GPU Compute Pool",
+      "operator": "MeitY (Ministry of Electronics & Information Technology)",
+      "city": "",
+      "state": "Pan-India",
+      "status": "operational",
+      "type": "National Compute Program",
+      "gpuCount": "38,000+ GPUs deployed by mid-2026 (target: 100,000 by Dec 2026)",
+      "investmentUSD": 1250000000,
+      "investmentDisplay": "₹10,372 crore (~$1.25B) mission outlay; compute subsidized at ₹65/GPU-hour",
+      "expectedCompletion": "Target: 100,000 GPUs by Dec 2026",
+      "partners": ["CMS Computers", "CtrlS", "E2E Networks", "Jio Platforms", "Locuz Enterprise Solutions", "NxtGen", "Orient Technologies", "Tata Communications", "Vensysco Technologies", "Yotta"],
+      "description": "A government-subsidized national GPU pool distributed across empanelled private partners' data centers, rather than a single site.",
+      "sources": [
+        { "title": "IndiaAI — MeitY accelerates empanelment of AI compute agencies", "url": "https://indiaai.gov.in/article/meity-accelerates-empanelment-of-agencies-to-provide-ai-compute-and-services-for-the-indiaai-mission" },
+        { "title": "Kapyn — IndiaAI Mission explained", "url": "https://www.kapyn.app/blog/indiaai-mission-explained-2026" }
+      ]
+    },
+    {
+      "id": "up-datacenter-policy-2026",
+      "name": "UP Data Centre Policy 2026",
+      "operator": "Government of Uttar Pradesh",
+      "city": "",
+      "state": "Uttar Pradesh",
+      "status": "announced",
+      "type": "State Policy",
+      "investmentUSD": 59000000000,
+      "investmentDisplay": "Targeting >₹4.9 trillion (~$59B) in private investment",
+      "announcedDate": "2026-07-06",
+      "expectedCompletion": "Target: 2GW of additional data center capacity",
+      "description": "Statewide policy framework rather than a single facility; hubs expected around Noida and Greater Noida.",
+      "sources": [
+        { "title": "GKToday — Uttar Pradesh approves Data Centre Policy 2026", "url": "https://www.gktoday.in/uttar-pradesh-approves-data-centre-policy-2026/" },
+        { "title": "Daily Pioneer — UP's blueprint for the AI age", "url": "https://dailypioneer.com/news/beyond-it-parks-uttar-pradeshs-blueprint-for-the-ai-age" }
+      ]
+    }
+  ]
+}

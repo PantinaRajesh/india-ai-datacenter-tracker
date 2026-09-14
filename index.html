@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>India AI Data Center Tracker</title>
+<meta name="description" content="Interactive map tracking AI and hyperscale data centers being built and operated across India — by operator, location, capacity, investment, and status." />
+
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+<link rel="stylesheet" href="vendor/leaflet.markercluster/MarkerCluster.css" />
+<link rel="stylesheet" href="vendor/leaflet.markercluster/MarkerCluster.Default.css" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗺️</text></svg>" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-brand">
+    <span class="brand-mark">⌁</span>
+    <div>
+      <h1>India AI Data Center Tracker</h1>
+      <p class="subtitle">Mapping AI, GPU-cloud &amp; hyperscale data center investment across India</p>
+    </div>
+  </div>
+  <div class="topbar-actions">
+    <button id="btn-view-map" class="view-toggle active" data-view="map">Map</button>
+    <button id="btn-view-table" class="view-toggle" data-view="table">Table</button>
+    <a id="link-suggest" class="btn-suggest" href="#" target="_blank" rel="noopener">+ Suggest an update</a>
+  </div>
+</header>
+
+<section class="stats-bar" id="stats-bar" aria-label="Summary statistics">
+  <div class="stat">
+    <span class="stat-value" id="stat-total">–</span>
+    <span class="stat-label">Facilities tracked</span>
+  </div>
+  <div class="stat">
+    <span class="stat-value" id="stat-mw">–</span>
+    <span class="stat-label">Total capacity (MW)</span>
+  </div>
+  <div class="stat">
+    <span class="stat-value" id="stat-investment">–</span>
+    <span class="stat-label">Disclosed investment</span>
+  </div>
+  <div class="stat">
+    <span class="stat-value" id="stat-states">–</span>
+    <span class="stat-label">States / UTs</span>
+  </div>
+  <div class="stat">
+    <span class="stat-value" id="stat-operators">–</span>
+    <span class="stat-label">Operators</span>
+  </div>
+  <div class="stat stat-updated">
+    <span class="stat-value" id="stat-updated">–</span>
+    <span class="stat-label">Data as of</span>
+  </div>
+</section>
+
+<main class="layout">
+
+  <aside class="sidebar">
+    <div class="search-box">
+      <input type="search" id="search-input" placeholder="Search operator, project, city..." aria-label="Search" />
+    </div>
+
+    <div class="filter-group">
+      <h3>Status</h3>
+      <div class="chip-row" id="filter-status"></div>
+    </div>
+
+    <div class="filter-group">
+      <h3>Operator</h3>
+      <select id="filter-operator"><option value="">All operators</option></select>
+    </div>
+
+    <div class="filter-group">
+      <h3>State / UT</h3>
+      <select id="filter-state"><option value="">All states</option></select>
+    </div>
+
+    <div class="filter-group">
+      <h3>Facility type</h3>
+      <select id="filter-type"><option value="">All types</option></select>
+    </div>
+
+    <div class="results-meta">
+      <span id="results-count">0</span> facilities shown
+      <button id="btn-reset-filters" class="link-btn">reset</button>
+    </div>
+
+    <ol class="facility-list" id="facility-list" aria-label="Facility list"></ol>
+  </aside>
+
+  <div class="content-pane">
+    <div id="map-view" class="view-panel active">
+      <div id="map"></div>
+      <div class="legend" id="legend">
+        <strong>Status</strong>
+        <div class="legend-item"><span class="dot dot-operational"></span> Operational</div>
+        <div class="legend-item"><span class="dot dot-under_construction"></span> Under construction</div>
+        <div class="legend-item"><span class="dot dot-planned"></span> Planned / announced</div>
+        <div class="legend-note">Marker size ≈ power capacity (MW)</div>
+      </div>
+    </div>
+
+    <div id="table-view" class="view-panel">
+      <div class="table-wrap">
+        <table id="data-table">
+          <thead>
+            <tr>
+              <th data-sort="name">Project</th>
+              <th data-sort="operator">Operator</th>
+              <th data-sort="city">Location</th>
+              <th data-sort="status">Status</th>
+              <th data-sort="capacityMW">Capacity (MW)</th>
+              <th data-sort="gpuCount">GPUs</th>
+              <th data-sort="investmentUSD">Investment</th>
+              <th data-sort="announcedDate">Announced</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="detail-panel" aria-live="polite">
+    <button class="detail-close" id="detail-close" aria-label="Close">×</button>
+    <div id="detail-content" class="detail-empty">
+      <p>Click any marker or list item to see full details about a facility — operator, capacity, investment, partners, and sources.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>
+    Data compiled from public announcements, company press releases, and news coverage — a fast-moving sector where figures change often.
+    Verify against primary sources (linked per entry) before relying on any number. Not affiliated with any operator listed.
+    <span id="footer-updated"></span>
+  </p>
+</footer>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="vendor/leaflet.markercluster/leaflet.markercluster.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

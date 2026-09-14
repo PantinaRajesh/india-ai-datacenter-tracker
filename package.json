@@ -1,0 +1,11 @@
+{
+  "name": "india-ai-datacenter-tracker",
+  "version": "1.0.0",
+  "description": "Interactive map tracking AI and hyperscale data center investment across India",
+  "private": true,
+  "scripts": {
+    "serve": "npx serve .",
+    "validate": "node scripts/validate-data.js"
+  },
+  "license": "MIT"
+}

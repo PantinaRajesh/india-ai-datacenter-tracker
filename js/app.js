@@ -20,11 +20,24 @@
     announced: "#8a5cf5",
   };
 
-  const SUGGEST_URL_FALLBACK =
-    "https://github.com/pantinarajesh/india-ai-datacenter-tracker/issues/new?labels=data-update&title=Data%20update%3A%20";
+  // Derive owner/repo from the live GitHub Pages URL itself (https://<owner>.github.io/<repo>/)
+  // rather than hardcoding a repo name, so these links never go stale after a rename.
+  function deriveGitHubRepo() {
+    const hostMatch = /^([^.]+)\.github\.io$/.exec(location.hostname);
+    if (!hostMatch) return null;
+    const pathParts = location.pathname.split("/").filter(Boolean);
+    if (!pathParts.length) return null;
+    return { owner: hostMatch[1], repo: pathParts[0] };
+  }
+  const GH_REPO = deriveGitHubRepo();
 
-  const RAW_JSON_URL =
-    "https://raw.githubusercontent.com/pantinarajesh/india-ai-datacenter-tracker/main/data/datacenters.json";
+  const SUGGEST_URL_FALLBACK = GH_REPO
+    ? `https://github.com/${GH_REPO.owner}/${GH_REPO.repo}/issues/new?labels=data-update&title=Data%20update%3A%20`
+    : "https://github.com/pantinarajesh/aidatacentermapping/issues/new?labels=data-update&title=Data%20update%3A%20";
+
+  const RAW_JSON_URL = GH_REPO
+    ? `https://raw.githubusercontent.com/${GH_REPO.owner}/${GH_REPO.repo}/main/data/datacenters.json`
+    : "https://raw.githubusercontent.com/pantinarajesh/aidatacentermapping/main/data/datacenters.json";
 
   const state = {
     facilities: [],

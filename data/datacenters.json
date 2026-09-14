@@ -1,8 +1,7 @@
 {
   "meta": {
     "lastUpdated": "2026-09-14",
-    "notes": "Compiled from public company announcements, press releases, and news coverage (22 searches across ~15 outlets). This is a fast-moving sector — treat every figure as approximate and verify via the linked source before relying on it. Entries with no lat/lng are national/state-level programs or facilities whose exact site is undisclosed; they appear in the list and table but not as map pins.",
-    "suggestUpdateUrl": "https://github.com/pantinarajesh/india-ai-datacenter-tracker/issues/new?labels=data-update&title=Data%20update"
+    "notes": "Compiled from public company announcements, press releases, and news coverage (22 searches across ~15 outlets). This is a fast-moving sector — treat every figure as approximate and verify via the linked source before relying on it. Entries with no lat/lng are national/state-level programs or facilities whose exact site is undisclosed; they appear in the list and table but not as map pins."
   },
   "facilities": [
     {

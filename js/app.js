@@ -56,6 +56,32 @@
       : "";
     const link = document.getElementById("link-suggest");
     link.href = state.meta.suggestUpdateUrl || SUGGEST_URL_FALLBACK;
+    loadChangelog();
+  }
+
+  async function loadChangelog() {
+    try {
+      const res = await fetch("data/changelog.json", { cache: "no-store" });
+      const entries = await res.json();
+      renderChangelog(Array.isArray(entries) ? entries : []);
+    } catch (err) {
+      console.error("Failed to load changelog", err);
+    }
+  }
+
+  function renderChangelog(entries) {
+    const list = document.getElementById("changelog-list");
+    list.innerHTML = "";
+    entries.forEach((entry) => {
+      const li = document.createElement("li");
+      li.className = "changelog-entry";
+      const changesHtml = (entry.changes || []).map((c) => `<li>${escapeHtml(c)}</li>`).join("");
+      li.innerHTML = `<span class="changelog-date">${escapeHtml(entry.date || "")}</span><ul>${changesHtml}</ul>`;
+      list.appendChild(li);
+    });
+    if (!entries.length) {
+      list.innerHTML = `<li class="detail-empty">No changelog entries yet.</li>`;
+    }
   }
 
   function normalizeFacility(f) {
@@ -78,6 +104,7 @@
       expectedCompletion: f.expectedCompletion || "",
       partners: Array.isArray(f.partners) ? f.partners : [],
       description: f.description || "",
+      conflictNote: f.conflictNote || "",
       sources: Array.isArray(f.sources) ? f.sources : [],
     };
   }
@@ -126,6 +153,20 @@
     });
 
     document.getElementById("detail-close").addEventListener("click", closeDetail);
+
+    const changelogOverlay = document.getElementById("changelog-overlay");
+    document.getElementById("btn-changelog").addEventListener("click", () => {
+      changelogOverlay.hidden = false;
+    });
+    document.getElementById("changelog-close").addEventListener("click", () => {
+      changelogOverlay.hidden = true;
+    });
+    changelogOverlay.addEventListener("click", (e) => {
+      if (e.target === changelogOverlay) changelogOverlay.hidden = true;
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !changelogOverlay.hidden) changelogOverlay.hidden = true;
+    });
 
     document.querySelectorAll("#data-table th[data-sort]").forEach((th) => {
       th.addEventListener("click", () => {
@@ -212,6 +253,13 @@
     document.getElementById("stat-states").textContent = uniqueSorted(f.map((x) => x.state).filter(Boolean)).length;
     document.getElementById("stat-operators").textContent = uniqueSorted(f.map((x) => x.operator)).length;
     document.getElementById("stat-updated").textContent = state.meta.lastUpdated || "–";
+    const conflictStat = document.getElementById("stat-conflicts");
+    if (conflictStat) conflictStat.textContent = f.filter((x) => x.conflictNote).length;
+  }
+
+  function conflictBadge(f, extraClass) {
+    if (!f.conflictNote) return "";
+    return `<span class="conflict-badge${extraClass ? " " + extraClass : ""}" title="${escapeAttr(f.conflictNote)}">⚠ Conflicting reports</span>`;
   }
 
   function formatLocation(f) {
@@ -279,6 +327,7 @@
         <h3>${escapeHtml(f.name)}</h3>
         <p class="pop-meta">${escapeHtml(f.operator)} · ${escapeHtml(formatLocation(f))}</p>
         <p class="pop-meta">${STATUS_LABELS[f.status] || f.status}${f.capacityMW ? " · " + f.capacityMW + " MW" : ""}</p>
+        ${conflictBadge(f)}
         <a href="#" class="pop-link" data-open-detail="${f.id}">View full details →</a>
       </div>`;
   }
@@ -302,7 +351,7 @@
       li.className = "facility-item" + (f.id === state.activeId ? " active" : "");
       li.dataset.id = f.id;
       li.innerHTML = `
-        <p class="fi-name">${escapeHtml(f.name)}</p>
+        <p class="fi-name">${escapeHtml(f.name)}${f.conflictNote ? ` <span class="conflict-dot" title="${escapeAttr(f.conflictNote)}">⚠</span>` : ""}</p>
         <div class="fi-meta">
           <span class="status-dot ${f.status}"></span>
           <span>${escapeHtml(f.operator)}</span>
@@ -336,7 +385,7 @@
     rows.forEach((f) => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>${escapeHtml(f.name)}</td>
+        <td>${escapeHtml(f.name)}${f.conflictNote ? ` <span class="conflict-dot" title="${escapeAttr(f.conflictNote)}">⚠</span>` : ""}</td>
         <td>${escapeHtml(f.operator)}</td>
         <td>${escapeHtml(formatLocation(f))}</td>
         <td><span class="status-dot ${f.status}"></span> ${STATUS_LABELS[f.status] || f.status}</td>
@@ -391,6 +440,7 @@
         <div class="detail-field"><span class="df-label">Coordinates</span><span class="df-value">${f.lat != null ? f.lat.toFixed(3) + ", " + f.lng.toFixed(3) : "Unknown"}</span></div>
       </div>
       ${f.description ? `<div class="detail-section"><h4>About</h4><p>${escapeHtml(f.description)}</p></div>` : ""}
+      ${f.conflictNote ? `<div class="detail-section conflict-callout"><h4>⚠ Conflicting reports</h4><p>${escapeHtml(f.conflictNote)}</p></div>` : ""}
       ${partnersHtml ? `<div class="detail-section"><h4>Partners</h4>${partnersHtml}</div>` : ""}
       <div class="detail-section"><h4>Sources</h4>${sourcesHtml}</div>
     `;

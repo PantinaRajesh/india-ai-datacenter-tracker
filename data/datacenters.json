@@ -163,6 +163,7 @@
       "expectedCompletion": "Construction to start ~early 2027; ~2.5 years to completion after that",
       "partners": ["Google", "Adani Group"],
       "description": "Google's first AI hub in India, spanning three campuses: Adivivaram (120 acres), Tarluvada (200 acres), and Rambilli-Achyutapuram (160 acres). Potentially gigawatt-scale, but exact final capacity is unconfirmed.",
+      "conflictNote": "Reported investment has varied by outlet: some coverage (e.g. Malaymail, Deccan Herald, Oct 2025) cited ~$10B, while Google's own blog and PIB (Apr 2026) state $15B. The $15B figure is more recent and from the primary source, so it's used above, but the discrepancy is unresolved.",
       "sources": [
         { "title": "Google Blog — India's first AI hub, powered by a $15B investment", "url": "https://blog.google/intl/en-in/company-news/our-first-ai-hub-in-india-powered-by-a-15-billion-investment/" },
         { "title": "DCD — Adani to invest up to $5bn in Google's Visakhapatnam campus", "url": "https://www.datacenterdynamics.com/en/news/indias-adani-group-set-to-invest-up-to-5bn-in-google-data-center-campus-in-visakhapatnam/" },
@@ -182,7 +183,8 @@
       "announcedDate": "2026-02-17",
       "expectedCompletion": "Target: 5GW of AI data center capacity by 2035",
       "partners": ["Google", "Microsoft"],
-      "description": "Group-wide pledge spanning the Visakhapatnam, Chennai, Hyderabad, Navi Mumbai, Noida and Pune AdaniConneX sites listed separately in this dataset. Reported capacity targets have shifted across statements (1GW by 2030, then 2GW, now 5GW by 2035) — likely the same evolving program rather than distinct commitments.",
+      "description": "Group-wide pledge spanning the Visakhapatnam, Chennai, Hyderabad, Navi Mumbai, Noida and Pune AdaniConneX sites listed separately in this dataset.",
+      "conflictNote": "Adani's stated capacity target has shifted across public statements: 1GW by 2030 in the original 2024 MoU, then a 2GW figure, now 5GW by 2035 tied to this Feb 2026 pledge. These are most likely the same program restated over time rather than three separate commitments, but that isn't confirmed.",
       "sources": [
         { "title": "Adani Newsroom — Adani commits USD 100 Bn to sovereign AI infrastructure", "url": "https://www.adani.com/newsroom/media-releases/adani-commits-usd-100-bn-to-sovereign-ai-infrastructure" },
         { "title": "TechCrunch — Adani pledges $100B for AI data centers", "url": "https://techcrunch.com/2026/02/17/adani-pledges-100b-for-ai-data-centers-as-india-seeks-bigger-role-in-global-ai/" }
@@ -317,6 +319,7 @@
       "type": "Hyperscale Cloud Region",
       "investmentUSD": 1300000000,
       "investmentDisplay": ">$1.3B invested by end of 2025; part of a $21B cloud/AI commitment (2026–2030)",
+      "conflictNote": "Amazon's India investment figures overlap across articles ($21B by 2030, a separate $13B figure, and >$1.3B already spent) without a clear statement of whether these are additive or restate the same underlying commitment. The $48B figure sometimes cited alongside these is Amazon's total India investment across all businesses, not data-center-specific — don't conflate it with the cloud/AI numbers here.",
       "partners": ["Telangana Government (workforce program)"],
       "sources": [
         { "title": "About Amazon India — AWS data centre in Hyderabad", "url": "https://www.aboutamazon.in/news/aws/aws-data-centre-hyderabad" },
@@ -429,7 +432,8 @@
       "investmentDisplay": "Part of a ₹4,200 crore (~$500M) Tamil Nadu commitment",
       "announcedDate": "2026-02",
       "partners": ["Government of Tamil Nadu"],
-      "description": "Sources disagree on Phase 1 sizing (7.2MW vs. 36MW cited in different articles); 45MW is the stated full AI-ready campus target.",
+      "description": "45MW is the stated full AI-ready campus target.",
+      "conflictNote": "Sources disagree on Phase 1 sizing: one article cites a 7.2MW first phase, another cites 36MW. Likely a difference in what each source counted as \"Phase 1,\" but unresolved.",
       "sources": [
         { "title": "CRN Asia — STT GDC launches 45MW AI-ready Chennai facility", "url": "https://www.crnasia.com/india/news/2026/stt-gdc-launches-45-mw-ai-ready-chennai-facility-commits-4-200-crore-investment" },
         { "title": "DCD — STT GDC India launches data center in Chennai", "url": "https://www.datacenterdynamics.com/en/news/stt-gdc-india-launches-data-center-in-chennai-targets-potential-ipo/" }
@@ -841,7 +845,8 @@
       "investmentDisplay": "₹2,000+ crore invested to date; ₹10,000 crore planned over the next year",
       "expectedCompletion": "Scaling toward 1GW capacity by 2028",
       "partners": ["Nvidia"],
-      "description": "Coordinates reflect Krutrim's Bengaluru HQ; the exact physical cluster site was not independently confirmed. Some reporting describes these clusters as A100/H100-based while naming them after Blackwell-generation GB200/NVL72 products — this inconsistency is unresolved.",
+      "description": "Coordinates reflect Krutrim's Bengaluru HQ; the exact physical cluster site was not independently confirmed.",
+      "conflictNote": "Some reporting describes these clusters as A100/H100-based while naming them after Blackwell-generation GB200/NVL72 products — likely a marketing label mismatch rather than the literal chip generation, but unconfirmed against Krutrim's own technical documentation.",
       "sources": [
         { "title": "DCD — India's Krutrim plans three chips and 1GW cloud expansion", "url": "https://www.datacenterdynamics.com/en/news/indias-krutrim-plans-three-chips-and-1gw-cloud-expansion-from-2026/" },
         { "title": "Outlook Business — Ola Krutrim to invest ₹10,000 crore", "url": "https://www.outlookbusiness.com/news/ola-krutrim-to-invest-rs-10000-crore-in-krutrim-ai-over-next-one-year" }

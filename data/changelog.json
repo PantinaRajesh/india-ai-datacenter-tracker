@@ -1,0 +1,25 @@
+[
+  {
+    "date": "2026-09-14",
+    "changes": [
+      "Flagged five facilities with conflicting figures across sources (Google's Visakhapatnam investment, AWS's overlapping commitment numbers, Adani's shifting capacity targets, STT GDC's phase sizing, Ola Krutrim's GPU generation naming) with an on-page warning badge instead of silently picking one number.",
+      "Added this public changelog."
+    ]
+  },
+  {
+    "date": "2026-09-14",
+    "changes": [
+      "Added SEO metadata: page title, meta description, Open Graph and Twitter Card tags, canonical URL, and JSON-LD structured data.",
+      "Added robots.txt and sitemap.xml.",
+      "Prepped for repository slug rename to india-ai-datacenter-tracker for a more searchable URL."
+    ]
+  },
+  {
+    "date": "2026-09-14",
+    "changes": [
+      "Initial launch: 48 facilities and programs tracked across 33 operators and 11 states/UTs, compiled from public announcements, press releases, and news coverage.",
+      "Interactive map (Leaflet, clustered, sized by MW capacity, color-coded by status) plus a sortable table view, filters, search, and a per-facility detail panel with linked sources.",
+      "Published to GitHub Pages with an automated validate-and-deploy pipeline."
+    ]
+  }
+]

@@ -57,6 +57,7 @@
   <div class="topbar-actions">
     <button id="btn-view-map" class="view-toggle active" data-view="map">Map</button>
     <button id="btn-view-table" class="view-toggle" data-view="table">Table</button>
+    <button id="btn-changelog" class="btn-suggest" type="button">Changelog</button>
     <a id="link-suggest" class="btn-suggest" href="#" target="_blank" rel="noopener">+ Suggest an update</a>
   </div>
 </header>
@@ -81,6 +82,10 @@
   <div class="stat">
     <span class="stat-value" id="stat-operators">–</span>
     <span class="stat-label">Operators</span>
+  </div>
+  <div class="stat" title="Facilities where public sources report conflicting figures — flagged, not silently picked">
+    <span class="stat-value" id="stat-conflicts">–</span>
+    <span class="stat-label">Conflicting reports ⚠</span>
   </div>
   <div class="stat stat-updated">
     <span class="stat-value" id="stat-updated">–</span>
@@ -164,6 +169,17 @@
   </div>
 
 </main>
+
+<div class="modal-overlay" id="changelog-overlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="changelog-title">
+    <div class="modal-header">
+      <h2 id="changelog-title">Changelog</h2>
+      <button class="detail-close" id="changelog-close" aria-label="Close" style="display:block;">×</button>
+    </div>
+    <p class="modal-subtitle">What's changed in this tracker's dataset and features, most recent first.</p>
+    <ol class="changelog-list" id="changelog-list"></ol>
+  </div>
+</div>
 
 <footer class="site-footer">
   <p>

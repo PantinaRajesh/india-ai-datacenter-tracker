@@ -2,6 +2,15 @@
   {
     "date": "2026-09-14",
     "changes": [
+      "Added five new views: Timeline (chronological, grouped by year), Capital Flows (which financial investors — CPP Investments, Blackstone, TPG, IFC, Alpha Wave Global, Carlyle, Anchorage Capital — are backing which operators), and Policy & Incentives (national/state programs tracked separately from physical facilities).",
+      "Added a Sustainability layer: land footprint, power source, and cooling technology where disclosed, surfaced in the detail panel and as a sidebar filter.",
+      "Added a Data & API panel with full-dataset JSON/CSV downloads and a raw-JSON endpoint for anyone who wants to build on this data directly, plus a per-view CSV export from the table.",
+      "Full visual redesign: new navigation, Inter typeface, refined spacing, hover/focus states, and smoother transitions throughout."
+    ]
+  },
+  {
+    "date": "2026-09-14",
+    "changes": [
       "Flagged five facilities with conflicting figures across sources (Google's Visakhapatnam investment, AWS's overlapping commitment numbers, Adani's shifting capacity targets, STT GDC's phase sizing, Ola Krutrim's GPU generation naming) with an on-page warning badge instead of silently picking one number.",
       "Added this public changelog."
     ]

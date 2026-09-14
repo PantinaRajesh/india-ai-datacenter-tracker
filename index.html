@@ -38,6 +38,8 @@
 }
 </script>
 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
 <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
 <link rel="stylesheet" href="vendor/leaflet.markercluster/MarkerCluster.css" />
 <link rel="stylesheet" href="vendor/leaflet.markercluster/MarkerCluster.Default.css" />
@@ -45,6 +47,8 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗺️</text></svg>" />
 </head>
 <body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
 
 <header class="topbar">
   <div class="topbar-brand">
@@ -55,12 +59,25 @@
     </div>
   </div>
   <div class="topbar-actions">
-    <button id="btn-view-map" class="view-toggle active" data-view="map">Map</button>
-    <button id="btn-view-table" class="view-toggle" data-view="table">Table</button>
-    <button id="btn-changelog" class="btn-suggest" type="button">Changelog</button>
-    <a id="link-suggest" class="btn-suggest" href="#" target="_blank" rel="noopener">+ Suggest an update</a>
+    <button id="btn-data-api" class="btn-icon-action" type="button" title="Open data &amp; API">
+      <span class="bia-icon" aria-hidden="true">⇩</span><span class="bia-label">Data &amp; API</span>
+    </button>
+    <button id="btn-changelog" class="btn-icon-action" type="button" title="What's changed">
+      <span class="bia-icon" aria-hidden="true">🕘</span><span class="bia-label">Changelog</span>
+    </button>
+    <a id="link-suggest" class="btn-icon-action btn-icon-accent" href="#" target="_blank" rel="noopener" title="Suggest a data update">
+      <span class="bia-icon" aria-hidden="true">＋</span><span class="bia-label">Suggest an update</span>
+    </a>
   </div>
 </header>
+
+<nav class="view-tabs" id="view-tabs" aria-label="Views">
+  <button class="view-toggle active" data-view="map" type="button"><span class="vt-icon">🗺️</span>Map</button>
+  <button class="view-toggle" data-view="table" type="button"><span class="vt-icon">☰</span>Table</button>
+  <button class="view-toggle" data-view="timeline" type="button"><span class="vt-icon">⏱</span>Timeline</button>
+  <button class="view-toggle" data-view="capital" type="button"><span class="vt-icon">💰</span>Capital Flows</button>
+  <button class="view-toggle" data-view="policy" type="button"><span class="vt-icon">🏛</span>Policy &amp; Incentives</button>
+</nav>
 
 <section class="stats-bar" id="stats-bar" aria-label="Summary statistics">
   <div class="stat">
@@ -93,7 +110,7 @@
   </div>
 </section>
 
-<main class="layout">
+<main class="layout" id="main-content">
 
   <aside class="sidebar">
     <div class="search-box">
@@ -120,6 +137,10 @@
       <select id="filter-type"><option value="">All types</option></select>
     </div>
 
+    <div class="filter-group">
+      <button id="filter-sustainable" class="chip chip-block" type="button">🌱 Sustainability data available</button>
+    </div>
+
     <div class="results-meta">
       <span id="results-count">0</span> facilities shown
       <button id="btn-reset-filters" class="link-btn">reset</button>
@@ -141,6 +162,10 @@
     </div>
 
     <div id="table-view" class="view-panel">
+      <div class="table-toolbar">
+        <span class="table-toolbar-label">Sortable — click a column header</span>
+        <button id="btn-export-csv" class="link-btn-strong" type="button">⇩ Export shown rows as CSV</button>
+      </div>
       <div class="table-wrap">
         <table id="data-table">
           <thead>
@@ -157,6 +182,36 @@
           </thead>
           <tbody id="table-body"></tbody>
         </table>
+      </div>
+    </div>
+
+    <div id="timeline-view" class="view-panel">
+      <div class="panel-scroll">
+        <div class="panel-intro">
+          <h2>Timeline</h2>
+          <p>Every tracked announcement, grouped by year — most recent first. A quick way to see how fast this sector is moving.</p>
+        </div>
+        <div class="timeline-list" id="timeline-list"></div>
+      </div>
+    </div>
+
+    <div id="capital-view" class="view-panel">
+      <div class="panel-scroll">
+        <div class="panel-intro">
+          <h2>Capital Flows</h2>
+          <p>Who's funding whom: financial investors (PE, sovereign, pension, and development funds) behind these projects — not just the operators building them.</p>
+        </div>
+        <ol class="capital-list" id="capital-list"></ol>
+      </div>
+    </div>
+
+    <div id="policy-view" class="view-panel">
+      <div class="panel-scroll">
+        <div class="panel-intro">
+          <h2>Policy &amp; Incentives</h2>
+          <p>National and state-level programs and policies driving this buildout — distinct from the physical facilities they enable.</p>
+        </div>
+        <ol class="policy-list" id="policy-list"></ol>
       </div>
     </div>
   </div>
@@ -178,6 +233,36 @@
     </div>
     <p class="modal-subtitle">What's changed in this tracker's dataset and features, most recent first.</p>
     <ol class="changelog-list" id="changelog-list"></ol>
+  </div>
+</div>
+
+<div class="modal-overlay" id="data-api-overlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="data-api-title">
+    <div class="modal-header">
+      <h2 id="data-api-title">Data &amp; API</h2>
+      <button class="detail-close" id="data-api-close" aria-label="Close" style="display:block;">×</button>
+    </div>
+    <p class="modal-subtitle">This entire dataset is free, open, and machine-readable — no key, no signup.</p>
+    <div class="detail-section">
+      <h4>Raw JSON endpoint</h4>
+      <p>Fetch it directly — it's the exact file this site reads:</p>
+      <code class="code-block" id="api-json-url"></code>
+    </div>
+    <div class="detail-section">
+      <h4>Download</h4>
+      <div class="modal-btn-row">
+        <button id="btn-download-json" class="btn-download" type="button">⇩ Full dataset (JSON)</button>
+        <button id="btn-download-csv" class="btn-download" type="button">⇩ Full dataset (CSV)</button>
+      </div>
+    </div>
+    <div class="detail-section">
+      <h4>Schema</h4>
+      <p>Each facility has: <code>id, name, operator, city, state, lat, lng, status, type, capacityMW, gpuCount, investmentUSD, announcedDate, expectedCompletion, partners[], investors[], sustainability{}, conflictNote, sources[]</code>. Full docs in the repo README.</p>
+    </div>
+    <div class="detail-section">
+      <h4>Attribution</h4>
+      <p>Free to reuse — a link back to this tracker is appreciated but not required. Figures are compiled from public sources; verify against the linked source before relying on any number.</p>
+    </div>
   </div>
 </div>
 

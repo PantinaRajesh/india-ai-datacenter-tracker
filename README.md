@@ -17,11 +17,30 @@ where, how big, and how far along.
   list/table row) for a full detail panel: operator, parent group, capacity,
   GPU/compute specs, disclosed investment, partners, timeline, and — critically
   — **linked sources** for every claim.
-- **Table view** — the same dataset as a sortable spreadsheet.
-- **Filters** — by status, operator, state/UT, and facility type, plus free-text
-  search across name/operator/city.
+- **Table view** — the same dataset as a sortable spreadsheet, with a
+  one-click CSV export of whatever's currently filtered.
+- **Timeline view** — every announcement grouped by year, most recent first.
+- **Capital Flows view** — which financial investors (PE, sovereign, pension,
+  development funds — CPP Investments, Blackstone, TPG, IFC, Alpha Wave
+  Global, Carlyle, Anchorage Capital) are backing which operators, not just
+  who's building what.
+- **Policy & Incentives view** — national and state programs (the $100B Adani
+  pledge, the IndiaAI Mission GPU pool, UP's Data Centre Policy) tracked
+  separately from the physical facilities they enable.
+- **Conflict flagging** — facilities where public sources disagree (e.g. two
+  different investment figures for the same project) get a visible ⚠ badge
+  and an explanation, instead of the tracker silently picking one number.
+- **Sustainability layer** — land footprint, power source, and cooling tech
+  where disclosed, filterable and shown in the detail panel.
+- **Filters** — by status, operator, state/UT, facility type, and sustainability
+  data availability, plus free-text search across name/operator/city.
 - **Summary stats bar** — total facilities, aggregate MW capacity, disclosed
-  investment, states covered, distinct operators, and data snapshot date.
+  investment, states covered, distinct operators, conflicting-report count,
+  and data snapshot date.
+- **Open data** — a "Data & API" panel with one-click JSON/CSV downloads of
+  the full dataset and the raw endpoint URL, so anyone can build on it
+  directly without scraping the site.
+- **Public changelog** — what changed in the dataset or features, in-app.
 - **No backend required** — pure static HTML/CSS/JS, so it runs anywhere
   (open the file directly, any static host, GitHub Pages, Netlify, Vercel).
 
@@ -82,6 +101,10 @@ Edit `data/datacenters.json`. Each entry follows this shape:
   "announcedDate": "2023-10",
   "expectedCompletion": "2025",
   "partners": ["Nvidia"],
+  "investors": [{ "name": "TPG", "amountUSD": 1000000000, "note": "Optional context" }],
+  "sustainability": { "landAcres": 264, "powerSource": "Renewable (solar PPA)", "coolingType": "Liquid cooling" },
+  "isPolicy": false,
+  "conflictNote": "Only set when sources genuinely disagree on a figure — explain the discrepancy, don't just pick one silently.",
   "description": "One or two sentences of context.",
   "sources": [{ "title": "Publication — headline", "url": "https://..." }]
 }
@@ -90,8 +113,17 @@ Edit `data/datacenters.json`. Each entry follows this shape:
 Only `id`, `name`, `operator`, and `status` are required — leave any other
 field out (or use `null`/omit) if unknown; the UI renders "Unknown" /
 "Undisclosed" rather than a blank. `lat`/`lng` are required for a pin to
-appear on the map; without them the facility still shows in the sidebar list
-and table.
+appear on the map; without them the facility still shows in the sidebar list,
+table, timeline, and (if applicable) the Capital Flows / Policy views.
+
+- `investors` is for **financial** backers (PE, sovereign, pension, development
+  funds) — keep tech/government partners in `partners` instead; an entry
+  shows up in the Capital Flows view only if it has `investors`.
+- `sustainability` is free-form (`landAcres`, `powerSource`, `coolingType`,
+  `note` — include only the ones you have data for); its presence alone
+  drives the "Sustainability data available" filter.
+- `isPolicy: true` marks a national/state program (not a physical facility)
+  for the Policy & Incentives view — don't set it on regular facilities.
 
 After editing, validate:
 
@@ -119,10 +151,11 @@ works too — there's nothing to build.
 ## Project structure
 
 ```
-index.html                  Page shell — topbar, stats bar, sidebar, map/table panes, detail panel
+index.html                  Page shell — topbar, nav tabs, stats bar, sidebar, all view panes, detail panel, modals
 css/style.css                All styling (light/dark aware via prefers-color-scheme)
-js/app.js                    App logic: data loading, filtering, map rendering, table, detail panel
+js/app.js                    App logic: data loading, filtering, map/table/timeline/capital/policy rendering, CSV export
 data/datacenters.json        The dataset — edit this to add/update facilities
+data/changelog.json          Entries shown in the in-app Changelog modal — add one per meaningful update
 scripts/validate-data.js     Schema + sanity validation, run locally and in CI
 .github/workflows/deploy.yml CI validation + GitHub Pages deploy
 ```
@@ -135,12 +168,11 @@ scripts/validate-data.js     Schema + sanity validation, run locally and in CI
 
 ## Ideas for extending this
 
-- A "growth over time" chart (cumulative announced MW by quarter).
+- A "growth over time" chart (cumulative announced MW by quarter) — the Timeline view's data is already shaped for this.
 - Per-state choropleth of total announced capacity.
-- Power-source breakdown (grid vs. captcaptive renewable vs. nuclear-adjacent) once that data is trackable.
-- Land/water-use and local environmental-impact notes per facility.
-- An API endpoint (or just the raw JSON) other trackers/dashboards can consume directly.
+- Water-use disclosures per facility (only power source and land are tracked today).
 - Automated headline-scanning to flag new candidate facilities for manual review before they're added.
+- Email/RSS alerts on new facilities or status changes.
 
 ## Disclaimer
 

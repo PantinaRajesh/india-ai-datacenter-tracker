@@ -162,6 +162,7 @@
       "announcedDate": "2026-04-28",
       "expectedCompletion": "Construction to start ~early 2027; ~2.5 years to completion after that",
       "partners": ["Google", "Adani Group"],
+      "sustainability": { "landAcres": 480, "note": "Spans three campuses totaling ~480 acres (120 + 200 + 160)." },
       "description": "Google's first AI hub in India, spanning three campuses: Adivivaram (120 acres), Tarluvada (200 acres), and Rambilli-Achyutapuram (160 acres). Potentially gigawatt-scale, but exact final capacity is unconfirmed.",
       "conflictNote": "Reported investment has varied by outlet: some coverage (e.g. Malaymail, Deccan Herald, Oct 2025) cited ~$10B, while Google's own blog and PIB (Apr 2026) state $15B. The $15B figure is more recent and from the primary source, so it's used above, but the discrepancy is unresolved.",
       "sources": [
@@ -178,6 +179,7 @@
       "state": "Pan-India",
       "status": "announced",
       "type": "National Investment Program",
+      "isPolicy": true,
       "investmentUSD": 100000000000,
       "investmentDisplay": "$100B direct + $150B catalyzed ≈ $250B ecosystem",
       "announcedDate": "2026-02-17",
@@ -227,6 +229,7 @@
       "announcedDate": "2026-06",
       "expectedCompletion": "~2028 (about 2 years from June 2026 announcement)",
       "partners": ["Meta", "Reliance Industries", "CleanMax / Fourth Partner Energy (renewables)"],
+      "sustainability": { "powerSource": "Renewable (CleanMax / Fourth Partner Energy supply)" },
       "description": "Meta's first AI data center deal in India, on Reliance-built capacity with options to scale further.",
       "sources": [
         { "title": "Meta Newsroom — Meta partners with Reliance on AI-enabled data center", "url": "https://about.fb.com/news/2026/06/meta-partners-with-reliance-on-ai-enabled-data-center-in-india/" },
@@ -266,6 +269,8 @@
       "announcedDate": "2026",
       "expectedCompletion": "Phased buildout toward up to 1GW at full build-out",
       "partners": ["TPG (financing)"],
+      "investors": [{ "name": "TPG", "amountUSD": 1000000000, "note": "Funding roughly half of a related $2B AI data center financing" }],
+      "sustainability": { "landAcres": 264 },
       "sources": [
         { "title": "TCS Newsroom — TCS, HyperVault to establish AI data center campus", "url": "https://www.tcs.com/who-we-are/newsroom/press-release/tcs-hypervault-establish-large-scale-ai-data-center-campus-telangana" },
         { "title": "Electrical Mirror — TCS HyperVault 1GW campus on 264 acres", "url": "https://electricalmirror.net/tcs-hypervault-to-develop-1gw-ai-data-centre-campus-on-264-acres-in-telangana/" },
@@ -356,6 +361,7 @@
       "investmentDisplay": "$2B six-year plan; plus CPP Investments ₹7,000cr (~$741M) for an 8.2% stake and JV",
       "announcedDate": "2026-06",
       "partners": ["CPP Investments (Canada Pension Plan)"],
+      "investors": [{ "name": "CPP Investments", "amountUSD": 741000000, "note": "₹7,000 crore for an 8.2% stake and JV (Jun 2026)" }],
       "description": "Operates 15+ data centers nationally (HQ Hyderabad, plus Mumbai, Chennai, Noida, Bengaluru and more); the map pin represents the HQ, not a single site. Adding 350MW of capacity over six years.",
       "sources": [
         { "title": "CRN Asia — CPP Investments commits $741M to CtrlS", "url": "https://www.crnasia.com/india/news/2026/cpp-investments-commits-741m-to-indian-data-center-operator-ctrls-to-ride-ai-infrastructure-wave" },
@@ -379,6 +385,7 @@
       "announcedDate": "2025-04",
       "expectedCompletion": "Buildout through 2026 and beyond; up to 500MW with a renewables mix",
       "partners": ["Telangana Government", "Neysa Networks"],
+      "sustainability": { "powerSource": "Planned grid + renewables mix, up to 500MW" },
       "sources": [
         { "title": "Inc42 — NTT DATA, Neysa to build ₹10,500 cr AI data centre in Hyderabad", "url": "https://inc42.com/buzz/ntt-data-neysa-to-build-inr-10500-cr-ai-data-centre-in-hyderabad/" },
         { "title": "Structure Research — NTT, Neysa Networks to build AI data centre", "url": "https://www.structureresearch.net/2025/05/01/ntt-neysa-networks-to-build-ai-data-centre-in-hyderabad-for-gpu-cloud/" }
@@ -413,6 +420,7 @@
       "investmentUSD": 1200000000,
       "investmentDisplay": "$1.2B raise, Blackstone-led; reached unicorn status Feb 2026",
       "partners": ["Blackstone"],
+      "investors": [{ "name": "Blackstone", "amountUSD": 1200000000, "note": "Led a $1.2B raise (Feb 2026)" }],
       "description": "Operates GPU hubs across both Mumbai and Hyderabad; pin represents Mumbai.",
       "sources": [
         { "title": "FounderPin — Neysa startup story", "url": "https://founderpin.com/startup_story/neysa/" }
@@ -483,6 +491,11 @@
       "announcedDate": "2026-03",
       "expectedCompletion": "Target: 1GW within the next few years (from ~250–300MW today)",
       "partners": ["Alpha Wave Global", "Carlyle", "Anchorage Capital"],
+      "investors": [
+        { "name": "Alpha Wave Global", "amountUSD": 435000000 },
+        { "name": "Carlyle", "amountUSD": 240000000 },
+        { "name": "Anchorage Capital", "amountUSD": 35000000 }
+      ],
       "description": "14 hyperscale plus 120+ edge data centers nationally, including a notable Chennai expansion (38MW facility, third DC in the city; 46MW across four Chennai sites).",
       "sources": [
         { "title": "CRN Asia — Airtel raises $1 billion for Nxtra", "url": "https://www.crnasia.com/india/news/2026/airtel-raises-1-billion-for-nxtra-to-scale-ai-ready-data-centre-capacity-to-1-gw" },
@@ -502,6 +515,8 @@
       "investmentUSD": 5000000000,
       "investmentDisplay": "$5B national expansion plan; IFC sustainability-linked loan for a 103MW AI-ready project",
       "partners": ["Nvidia (DGX-Ready certification)", "IFC"],
+      "investors": [{ "name": "IFC (International Finance Corporation)", "amountUSD": null, "note": "Sustainability-linked loan for a 103MW AI-ready project; amount undisclosed" }],
+      "sustainability": { "note": "Financed via an IFC sustainability-linked loan tied to ESG covenants." },
       "description": "Part of a 129MW operational national portfolio (Mar 2026) spanning Navi Mumbai and Chennai; Nvidia DGX-Ready certified up to 130kW/rack.",
       "sources": [
         { "title": "DCD — Sify to invest $5bn in Indian AI data center expansion", "url": "https://www.datacenterdynamics.com/en/news/sify-technologies-to-invest-5bn-in-indian-ai-data-center-expansion/" },
@@ -519,6 +534,7 @@
       "status": "operational",
       "type": "AI-ready Data Center",
       "partners": ["Nvidia"],
+      "sustainability": { "coolingType": "Liquid cooling (Nvidia DGX-Ready, up to 130kW/rack)" },
       "description": "Nvidia DGX-Ready certified for liquid cooling, up to 130kW per rack.",
       "sources": [
         { "title": "Sify — First in India to achieve Nvidia DGX-Ready certification", "url": "https://www.sifytechnologies.com/news/sify-becomes-first-in-india-to-achieve-nvidia-dgx-ready-data-center-certification-for-liquid-cooling-to-enable-breakthrough-ai-performance/" }
@@ -646,6 +662,7 @@
       "investmentDisplay": "Part of a $1B India program (within a $5B Asia AI-ready program)",
       "expectedCompletion": "Tripling to 150MW across 3 new buildings; first 100MW phase in 2026",
       "partners": ["Tata Power (solar PPA)"],
+      "sustainability": { "powerSource": "Renewable (solar PPA with Tata Power)" },
       "sources": [
         { "title": "PDG Newsroom — Major India expansion to 230MW in Mumbai and Chennai", "url": "https://princetondg.com/newsroom/princeton-digital-group-unveils-major-india-expansion-taking-total-capacity-to-230-mw-in-mumbai-and-chennai/" },
         { "title": "DCD — PDG announces $1bn India expansion", "url": "https://www.datacenterdynamics.com/en/news/pdg-announces-1bn-india-expansion-in-mumbai-and-chennai/" }
@@ -772,6 +789,7 @@
       "investmentDisplay": "Undisclosed (industry benchmark suggests ~$9–10B for a 250MW gigawatt-scale campus)",
       "announcedDate": "2026-02",
       "partners": ["Nvidia"],
+      "sustainability": { "landAcres": 300 },
       "sources": [
         { "title": "L&T Press Release — L&T teaming with Nvidia to build gigawatt-scale AI factory", "url": "https://www.larsentoubro.com/pressreleases/2026/2026-02-18-lt-teaming-with-nvidia-to-build-india-s-largest-gigawatt-scale-ai-factory" },
         { "title": "Inc42 — L&T, Nvidia join forces on gigawatt-scale AI data centre", "url": "https://inc42.com/buzz/lt-nvidia-join-forces-to-build-gigawatt-scale-ai-data-centre-in-india/" }
@@ -809,6 +827,7 @@
       "investmentDisplay": "₹25,000 crore (~$3B)",
       "expectedCompletion": "Operations expected by 2028",
       "partners": ["Government of Gujarat"],
+      "sustainability": { "note": "Marketed as a green data center; specific renewable-power or water-use commitments not yet disclosed." },
       "sources": [
         { "title": "News On Air — Gujarat signs agreement with L&T Vyoma", "url": "https://www.newsonair.gov.in/gujarat-signs-agreement-with-larsen-toubro-vyoma-to-build-ai-data-center-in-dholera" }
       ]
@@ -865,6 +884,7 @@
       "capacityMW": 10,
       "expectedCompletion": "Going live Oct 31, 2026",
       "partners": ["MeitY (empanelled)"],
+      "sustainability": { "coolingType": "Direct-to-chip liquid cooling" },
       "description": "Direct-to-chip liquid cooling facility; part of a wider network also spanning Jaipur, Raipur and Bengaluru.",
       "sources": [
         { "title": "OpenPR — Cyfuture Cloud unveils India's premier 10MW liquid-cooled AI facility", "url": "https://www.openpr.com/news/4533304/cyfuture-cloud-unveils-india-s-premier-10mw-liquid-cooled-ai" },
@@ -879,6 +899,7 @@
       "state": "Pan-India",
       "status": "operational",
       "type": "National Compute Program",
+      "isPolicy": true,
       "gpuCount": "38,000+ GPUs deployed by mid-2026 (target: 100,000 by Dec 2026)",
       "investmentUSD": 1250000000,
       "investmentDisplay": "₹10,372 crore (~$1.25B) mission outlay; compute subsidized at ₹65/GPU-hour",
@@ -898,6 +919,7 @@
       "state": "Uttar Pradesh",
       "status": "announced",
       "type": "State Policy",
+      "isPolicy": true,
       "investmentUSD": 59000000000,
       "investmentDisplay": "Targeting >₹4.9 trillion (~$59B) in private investment",
       "announcedDate": "2026-07-06",

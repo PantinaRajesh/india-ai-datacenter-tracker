@@ -1,6 +1,7 @@
 /* India AI Data Center Tracker
    Vanilla JS app: loads data/datacenters.json, renders a Leaflet map,
-   a filterable sidebar list, a sortable table view, and a detail panel. */
+   a filterable sidebar list, a sortable table, timeline, capital-flows,
+   and policy views, plus a per-facility detail panel. */
 
 (function () {
   "use strict";
@@ -22,11 +23,14 @@
   const SUGGEST_URL_FALLBACK =
     "https://github.com/pantinarajesh/india-ai-datacenter-tracker/issues/new?labels=data-update&title=Data%20update%3A%20";
 
+  const RAW_JSON_URL =
+    "https://raw.githubusercontent.com/pantinarajesh/india-ai-datacenter-tracker/main/data/datacenters.json";
+
   const state = {
     facilities: [],
     meta: {},
     filtered: [],
-    filters: { status: new Set(), operator: "", stateName: "", type: "", q: "" },
+    filters: { status: new Set(), operator: "", stateName: "", type: "", q: "", sustainableOnly: false },
     activeId: null,
     sort: { key: "name", dir: 1 },
     map: null,
@@ -56,8 +60,178 @@
       : "";
     const link = document.getElementById("link-suggest");
     link.href = state.meta.suggestUpdateUrl || SUGGEST_URL_FALLBACK;
+    document.getElementById("api-json-url").textContent = RAW_JSON_URL;
     loadChangelog();
   }
+
+  function normalizeFacility(f) {
+    return {
+      id: f.id,
+      name: f.name || "Unnamed facility",
+      operator: f.operator || "Unknown",
+      parentGroup: f.parentGroup || "",
+      city: f.city || "",
+      state: f.state || "",
+      lat: typeof f.lat === "number" ? f.lat : null,
+      lng: typeof f.lng === "number" ? f.lng : null,
+      status: f.status || "announced",
+      type: f.type || "Data Center",
+      isPolicy: !!f.isPolicy,
+      capacityMW: typeof f.capacityMW === "number" ? f.capacityMW : null,
+      gpuCount: f.gpuCount || "",
+      investmentUSD: typeof f.investmentUSD === "number" ? f.investmentUSD : null,
+      investmentDisplay: f.investmentDisplay || "",
+      announcedDate: f.announcedDate || "",
+      expectedCompletion: f.expectedCompletion || "",
+      partners: Array.isArray(f.partners) ? f.partners : [],
+      investors: Array.isArray(f.investors) ? f.investors : [],
+      sustainability: f.sustainability && typeof f.sustainability === "object" ? f.sustainability : null,
+      description: f.description || "",
+      conflictNote: f.conflictNote || "",
+      sources: Array.isArray(f.sources) ? f.sources : [],
+    };
+  }
+
+  /* ---------------- UI wiring ---------------- */
+
+  function wireStaticUI() {
+    document.querySelectorAll(".view-toggle").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".view-toggle").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const view = btn.dataset.view;
+        document.querySelectorAll(".view-panel").forEach((p) => p.classList.remove("active"));
+        document.getElementById(view + "-view").classList.add("active");
+        if (view === "map" && state.map) setTimeout(() => state.map.invalidateSize(), 50);
+      });
+    });
+
+    document.getElementById("search-input").addEventListener("input", (e) => {
+      state.filters.q = e.target.value.trim().toLowerCase();
+      applyFilters();
+    });
+
+    document.getElementById("filter-operator").addEventListener("change", (e) => {
+      state.filters.operator = e.target.value;
+      applyFilters();
+    });
+    document.getElementById("filter-state").addEventListener("change", (e) => {
+      state.filters.stateName = e.target.value;
+      applyFilters();
+    });
+    document.getElementById("filter-type").addEventListener("change", (e) => {
+      state.filters.type = e.target.value;
+      applyFilters();
+    });
+
+    const sustainBtn = document.getElementById("filter-sustainable");
+    sustainBtn.addEventListener("click", () => {
+      state.filters.sustainableOnly = !state.filters.sustainableOnly;
+      sustainBtn.classList.toggle("active", state.filters.sustainableOnly);
+      applyFilters();
+    });
+
+    document.getElementById("btn-reset-filters").addEventListener("click", () => {
+      state.filters = { status: new Set(), operator: "", stateName: "", type: "", q: "", sustainableOnly: false };
+      document.getElementById("search-input").value = "";
+      document.getElementById("filter-operator").value = "";
+      document.getElementById("filter-state").value = "";
+      document.getElementById("filter-type").value = "";
+      sustainBtn.classList.remove("active");
+      document.querySelectorAll("#filter-status .chip").forEach((c) => c.classList.remove("active"));
+      applyFilters();
+    });
+
+    document.getElementById("detail-close").addEventListener("click", closeDetail);
+
+    wireModal("btn-changelog", "changelog-overlay", "changelog-close");
+    wireModal("btn-data-api", "data-api-overlay", "data-api-close");
+
+    document.querySelectorAll("#data-table th[data-sort]").forEach((th) => {
+      th.addEventListener("click", () => {
+        const key = th.dataset.sort;
+        if (state.sort.key === key) state.sort.dir *= -1;
+        else {
+          state.sort.key = key;
+          state.sort.dir = 1;
+        }
+        renderTable();
+      });
+    });
+
+    document.getElementById("btn-export-csv").addEventListener("click", () => {
+      downloadCSV(state.filtered, "india-ai-datacenters-filtered.csv");
+    });
+    document.getElementById("btn-download-csv").addEventListener("click", () => {
+      downloadCSV(state.facilities, "india-ai-datacenters-full.csv");
+    });
+    document.getElementById("btn-download-json").addEventListener("click", () => {
+      const a = document.createElement("a");
+      a.href = "data/datacenters.json";
+      a.download = "india-ai-datacenters.json";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+
+    const statusRow = document.getElementById("filter-status");
+    Object.keys(STATUS_LABELS)
+      .filter((k) => k !== "announced")
+      .forEach((key) => {
+        const chip = document.createElement("button");
+        chip.className = "chip";
+        chip.type = "button";
+        chip.innerHTML = `<span class="dot" style="background:${STATUS_COLORS[key]}"></span>${STATUS_LABELS[key]}`;
+        chip.addEventListener("click", () => {
+          chip.classList.toggle("active");
+          if (chip.classList.contains("active")) state.filters.status.add(key);
+          else state.filters.status.delete(key);
+          applyFilters();
+        });
+        statusRow.appendChild(chip);
+      });
+  }
+
+  function wireModal(btnId, overlayId, closeId) {
+    const overlay = document.getElementById(overlayId);
+    document.getElementById(btnId).addEventListener("click", () => {
+      overlay.hidden = false;
+    });
+    document.getElementById(closeId).addEventListener("click", () => {
+      overlay.hidden = true;
+    });
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) overlay.hidden = true;
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !overlay.hidden) overlay.hidden = true;
+    });
+  }
+
+  function buildFilterOptions() {
+    const operators = uniqueSorted(state.facilities.map((f) => f.operator));
+    const states = uniqueSorted(state.facilities.map((f) => f.state).filter(Boolean));
+    const types = uniqueSorted(state.facilities.map((f) => f.type).filter(Boolean));
+    fillSelect("filter-operator", operators);
+    fillSelect("filter-state", states);
+    fillSelect("filter-type", types);
+  }
+
+  function fillSelect(id, values) {
+    const sel = document.getElementById(id);
+    values.forEach((v) => {
+      const opt = document.createElement("option");
+      opt.value = v;
+      opt.textContent = v;
+      sel.appendChild(opt);
+    });
+  }
+
+  function uniqueSorted(arr) {
+    return Array.from(new Set(arr)).sort((a, b) => a.localeCompare(b));
+  }
+
+  /* ---------------- Changelog ---------------- */
 
   async function loadChangelog() {
     try {
@@ -84,151 +258,20 @@
     }
   }
 
-  function normalizeFacility(f) {
-    return {
-      id: f.id,
-      name: f.name || "Unnamed facility",
-      operator: f.operator || "Unknown",
-      parentGroup: f.parentGroup || "",
-      city: f.city || "",
-      state: f.state || "",
-      lat: typeof f.lat === "number" ? f.lat : null,
-      lng: typeof f.lng === "number" ? f.lng : null,
-      status: f.status || "announced",
-      type: f.type || "Data Center",
-      capacityMW: typeof f.capacityMW === "number" ? f.capacityMW : null,
-      gpuCount: f.gpuCount || "",
-      investmentUSD: typeof f.investmentUSD === "number" ? f.investmentUSD : null,
-      investmentDisplay: f.investmentDisplay || "",
-      announcedDate: f.announcedDate || "",
-      expectedCompletion: f.expectedCompletion || "",
-      partners: Array.isArray(f.partners) ? f.partners : [],
-      description: f.description || "",
-      conflictNote: f.conflictNote || "",
-      sources: Array.isArray(f.sources) ? f.sources : [],
-    };
-  }
-
-  /* ---------------- UI wiring ---------------- */
-
-  function wireStaticUI() {
-    document.querySelectorAll(".view-toggle").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".view-toggle").forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        const view = btn.dataset.view;
-        document.querySelectorAll(".view-panel").forEach((p) => p.classList.remove("active"));
-        document.getElementById(view + "-view").classList.add("active");
-        if (view === "map" && state.map) setTimeout(() => state.map.invalidateSize(), 50);
-        if (view === "table") renderTable();
-      });
-    });
-
-    document.getElementById("search-input").addEventListener("input", (e) => {
-      state.filters.q = e.target.value.trim().toLowerCase();
-      applyFilters();
-    });
-
-    document.getElementById("filter-operator").addEventListener("change", (e) => {
-      state.filters.operator = e.target.value;
-      applyFilters();
-    });
-    document.getElementById("filter-state").addEventListener("change", (e) => {
-      state.filters.stateName = e.target.value;
-      applyFilters();
-    });
-    document.getElementById("filter-type").addEventListener("change", (e) => {
-      state.filters.type = e.target.value;
-      applyFilters();
-    });
-
-    document.getElementById("btn-reset-filters").addEventListener("click", () => {
-      state.filters = { status: new Set(), operator: "", stateName: "", type: "", q: "" };
-      document.getElementById("search-input").value = "";
-      document.getElementById("filter-operator").value = "";
-      document.getElementById("filter-state").value = "";
-      document.getElementById("filter-type").value = "";
-      document.querySelectorAll("#filter-status .chip").forEach((c) => c.classList.remove("active"));
-      applyFilters();
-    });
-
-    document.getElementById("detail-close").addEventListener("click", closeDetail);
-
-    const changelogOverlay = document.getElementById("changelog-overlay");
-    document.getElementById("btn-changelog").addEventListener("click", () => {
-      changelogOverlay.hidden = false;
-    });
-    document.getElementById("changelog-close").addEventListener("click", () => {
-      changelogOverlay.hidden = true;
-    });
-    changelogOverlay.addEventListener("click", (e) => {
-      if (e.target === changelogOverlay) changelogOverlay.hidden = true;
-    });
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !changelogOverlay.hidden) changelogOverlay.hidden = true;
-    });
-
-    document.querySelectorAll("#data-table th[data-sort]").forEach((th) => {
-      th.addEventListener("click", () => {
-        const key = th.dataset.sort;
-        if (state.sort.key === key) state.sort.dir *= -1;
-        else {
-          state.sort.key = key;
-          state.sort.dir = 1;
-        }
-        renderTable();
-      });
-    });
-
-    const statusRow = document.getElementById("filter-status");
-    Object.keys(STATUS_LABELS)
-      .filter((k) => k !== "announced")
-      .forEach((key) => {
-        const chip = document.createElement("button");
-        chip.className = "chip";
-        chip.innerHTML = `<span class="dot" style="background:${STATUS_COLORS[key]}"></span>${STATUS_LABELS[key]}`;
-        chip.addEventListener("click", () => {
-          chip.classList.toggle("active");
-          if (chip.classList.contains("active")) state.filters.status.add(key);
-          else state.filters.status.delete(key);
-          applyFilters();
-        });
-        statusRow.appendChild(chip);
-      });
-  }
-
-  function buildFilterOptions() {
-    const operators = uniqueSorted(state.facilities.map((f) => f.operator));
-    const states = uniqueSorted(state.facilities.map((f) => f.state).filter(Boolean));
-    const types = uniqueSorted(state.facilities.map((f) => f.type).filter(Boolean));
-    fillSelect("filter-operator", operators);
-    fillSelect("filter-state", states);
-    fillSelect("filter-type", types);
-  }
-
-  function fillSelect(id, values) {
-    const sel = document.getElementById(id);
-    values.forEach((v) => {
-      const opt = document.createElement("option");
-      opt.value = v;
-      opt.textContent = v;
-      sel.appendChild(opt);
-    });
-  }
-
-  function uniqueSorted(arr) {
-    return Array.from(new Set(arr)).sort((a, b) => a.localeCompare(b));
-  }
-
   /* ---------------- Filtering ---------------- */
 
+  function isSustainable(f) {
+    return !!f.sustainability;
+  }
+
   function applyFilters() {
-    const { status, operator, stateName, type, q } = state.filters;
+    const { status, operator, stateName, type, q, sustainableOnly } = state.filters;
     state.filtered = state.facilities.filter((f) => {
       if (status.size && !status.has(f.status)) return false;
       if (operator && f.operator !== operator) return false;
       if (stateName && f.state !== stateName) return false;
       if (type && f.type !== type) return false;
+      if (sustainableOnly && !isSustainable(f)) return false;
       if (q) {
         const hay = `${f.name} ${f.operator} ${f.city} ${f.state} ${f.parentGroup}`.toLowerCase();
         if (!hay.includes(q)) return false;
@@ -238,6 +281,9 @@
     renderList();
     renderMarkers();
     renderTable();
+    renderTimeline();
+    renderCapitalFlows();
+    renderPolicy();
     document.getElementById("results-count").textContent = state.filtered.length;
   }
 
@@ -253,13 +299,12 @@
     document.getElementById("stat-states").textContent = uniqueSorted(f.map((x) => x.state).filter(Boolean)).length;
     document.getElementById("stat-operators").textContent = uniqueSorted(f.map((x) => x.operator)).length;
     document.getElementById("stat-updated").textContent = state.meta.lastUpdated || "–";
-    const conflictStat = document.getElementById("stat-conflicts");
-    if (conflictStat) conflictStat.textContent = f.filter((x) => x.conflictNote).length;
+    document.getElementById("stat-conflicts").textContent = f.filter((x) => x.conflictNote).length;
   }
 
-  function conflictBadge(f, extraClass) {
+  function conflictBadge(f) {
     if (!f.conflictNote) return "";
-    return `<span class="conflict-badge${extraClass ? " " + extraClass : ""}" title="${escapeAttr(f.conflictNote)}">⚠ Conflicting reports</span>`;
+    return `<span class="conflict-badge" title="${escapeAttr(f.conflictNote)}">⚠ Conflicting reports</span>`;
   }
 
   function formatLocation(f) {
@@ -351,7 +396,7 @@
       li.className = "facility-item" + (f.id === state.activeId ? " active" : "");
       li.dataset.id = f.id;
       li.innerHTML = `
-        <p class="fi-name">${escapeHtml(f.name)}${f.conflictNote ? ` <span class="conflict-dot" title="${escapeAttr(f.conflictNote)}">⚠</span>` : ""}</p>
+        <p class="fi-name">${escapeHtml(f.name)}${f.conflictNote ? ` <span class="conflict-dot" title="${escapeAttr(f.conflictNote)}">⚠</span>` : ""}${f.sustainability ? ` <span title="Sustainability data available">🌱</span>` : ""}</p>
         <div class="fi-meta">
           <span class="status-dot ${f.status}"></span>
           <span>${escapeHtml(f.operator)}</span>
@@ -398,6 +443,148 @@
     });
   }
 
+  /* ---------------- Timeline view ---------------- */
+
+  function dateSortKey(dateStr) {
+    if (!dateStr) return "";
+    if (dateStr.length === 4) return dateStr + "-13-99";
+    if (dateStr.length === 7) return dateStr + "-99";
+    return dateStr;
+  }
+
+  function announcedYear(dateStr) {
+    const m = /^(\d{4})/.exec(dateStr || "");
+    return m ? m[1] : null;
+  }
+
+  function renderTimeline() {
+    const container = document.getElementById("timeline-list");
+    container.innerHTML = "";
+    const withDate = state.filtered.filter((f) => f.announcedDate);
+    const withoutDate = state.filtered.filter((f) => !f.announcedDate);
+    withDate.sort((a, b) => dateSortKey(b.announcedDate).localeCompare(dateSortKey(a.announcedDate)));
+
+    let lastYear = null;
+    withDate.forEach((f) => {
+      const year = announcedYear(f.announcedDate);
+      if (year !== lastYear) {
+        const h = document.createElement("div");
+        h.className = "timeline-year";
+        h.textContent = year;
+        container.appendChild(h);
+        lastYear = year;
+      }
+      container.appendChild(timelineItem(f));
+    });
+
+    if (withoutDate.length) {
+      const h = document.createElement("div");
+      h.className = "timeline-year";
+      h.textContent = "Date unknown";
+      container.appendChild(h);
+      withoutDate
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .forEach((f) => container.appendChild(timelineItem(f)));
+    }
+
+    if (!withDate.length && !withoutDate.length) {
+      container.innerHTML = `<p class="detail-empty">No facilities match these filters.</p>`;
+    }
+  }
+
+  function timelineItem(f) {
+    const item = document.createElement("div");
+    item.className = `timeline-item status-${f.status}`;
+    item.innerHTML = `
+      <span class="timeline-date">${escapeHtml(f.announcedDate || "Unknown")}</span>
+      <div class="timeline-body">
+        <p class="tb-name">${escapeHtml(f.name)}${f.conflictNote ? ` <span class="conflict-dot" title="${escapeAttr(f.conflictNote)}">⚠</span>` : ""}</p>
+        <p class="tb-meta">${escapeHtml(f.operator)} · ${escapeHtml(formatLocation(f))} · ${STATUS_LABELS[f.status] || f.status}</p>
+      </div>`;
+    item.addEventListener("click", () => openDetail(f.id));
+    return item;
+  }
+
+  /* ---------------- Capital Flows view ---------------- */
+
+  function renderCapitalFlows() {
+    const container = document.getElementById("capital-list");
+    container.innerHTML = "";
+    const byInvestor = new Map();
+    state.filtered.forEach((f) => {
+      (f.investors || []).forEach((inv) => {
+        if (!byInvestor.has(inv.name)) byInvestor.set(inv.name, { total: 0, hasUnknown: false, deals: [] });
+        const entry = byInvestor.get(inv.name);
+        if (typeof inv.amountUSD === "number") entry.total += inv.amountUSD;
+        else entry.hasUnknown = true;
+        entry.deals.push({ facility: f, amountUSD: inv.amountUSD, note: inv.note || "" });
+      });
+    });
+
+    const investors = Array.from(byInvestor.entries()).sort((a, b) => b[1].total - a[1].total);
+
+    investors.forEach(([name, data]) => {
+      const li = document.createElement("li");
+      li.className = "capital-card";
+      const dealsHtml = data.deals
+        .map(
+          (d) => `
+        <li class="capital-deal" data-id="${d.facility.id}">
+          <span class="cd-name">${escapeHtml(d.facility.operator)} — ${escapeHtml(d.facility.name)}</span>
+          <span class="cd-amount">${d.amountUSD ? formatUSD(d.amountUSD) : "Undisclosed"}</span>
+        </li>`
+        )
+        .join("");
+      li.innerHTML = `
+        <div class="capital-head">
+          <h3>${escapeHtml(name)}</h3>
+          <span class="capital-total">${data.total ? formatUSD(data.total) + (data.hasUnknown ? "+" : "") : "Undisclosed amount"}</span>
+        </div>
+        <ul class="capital-deals">${dealsHtml}</ul>`;
+      li.querySelectorAll(".capital-deal").forEach((el) => {
+        el.addEventListener("click", () => openDetail(el.dataset.id));
+      });
+      container.appendChild(li);
+    });
+
+    if (!investors.length) {
+      container.innerHTML = `<p class="detail-empty">No tracked financial investors among the facilities matching these filters. Try resetting filters — investor data is only recorded for a subset of deals where it's been publicly disclosed.</p>`;
+    }
+  }
+
+  /* ---------------- Policy & Incentives view ---------------- */
+
+  function renderPolicy() {
+    const container = document.getElementById("policy-list");
+    container.innerHTML = "";
+    const policies = state.filtered.filter((f) => f.isPolicy);
+    policies.forEach((f) => {
+      const li = document.createElement("li");
+      li.className = "policy-card";
+      li.dataset.id = f.id;
+      const figures = [];
+      if (f.investmentDisplay || f.investmentUSD) {
+        figures.push(`<span class="policy-figure">Investment: <b>${escapeHtml(f.investmentDisplay || formatUSD(f.investmentUSD))}</b></span>`);
+      }
+      if (f.expectedCompletion) {
+        figures.push(`<span class="policy-figure">Target: <b>${escapeHtml(f.expectedCompletion)}</b></span>`);
+      }
+      if (f.announcedDate) {
+        figures.push(`<span class="policy-figure">Announced: <b>${escapeHtml(f.announcedDate)}</b></span>`);
+      }
+      li.innerHTML = `
+        <h3>${escapeHtml(f.name)}</h3>
+        <p class="policy-meta">${escapeHtml(f.operator)} · ${escapeHtml(f.state || "Pan-India")}</p>
+        ${f.description ? `<p>${escapeHtml(f.description)}</p>` : ""}
+        <div class="policy-figures">${figures.join("")}</div>`;
+      li.addEventListener("click", () => openDetail(f.id));
+      container.appendChild(li);
+    });
+    if (!policies.length) {
+      container.innerHTML = `<p class="detail-empty">No government policies or national programs match these filters.</p>`;
+    }
+  }
+
   /* ---------------- Detail panel ---------------- */
 
   function openDetail(id) {
@@ -416,6 +603,24 @@
     const partnersHtml = f.partners.length
       ? f.partners.map((p) => `<span class="partner-tag">${escapeHtml(p)}</span>`).join("")
       : "";
+
+    const investorsHtml = f.investors.length
+      ? f.investors
+          .map(
+            (inv) =>
+              `<div class="investor-row"><span>${escapeHtml(inv.name)}${inv.note ? " — " + escapeHtml(inv.note) : ""}</span><strong>${inv.amountUSD ? formatUSD(inv.amountUSD) : "Undisclosed"}</strong></div>`
+          )
+          .join("")
+      : "";
+
+    const sustainability = f.sustainability;
+    const sustainRows = [];
+    if (sustainability) {
+      if (sustainability.landAcres) sustainRows.push(`<div class="investor-row"><span>Land footprint</span><strong>${sustainability.landAcres} acres</strong></div>`);
+      if (sustainability.powerSource) sustainRows.push(`<div class="investor-row"><span>Power source</span><strong>${escapeHtml(sustainability.powerSource)}</strong></div>`);
+      if (sustainability.coolingType) sustainRows.push(`<div class="investor-row"><span>Cooling</span><strong>${escapeHtml(sustainability.coolingType)}</strong></div>`);
+      if (sustainability.note) sustainRows.push(`<p style="margin-top:8px;">${escapeHtml(sustainability.note)}</p>`);
+    }
 
     const sourcesHtml = f.sources.length
       ? `<ul class="source-list">${f.sources
@@ -441,6 +646,8 @@
       </div>
       ${f.description ? `<div class="detail-section"><h4>About</h4><p>${escapeHtml(f.description)}</p></div>` : ""}
       ${f.conflictNote ? `<div class="detail-section conflict-callout"><h4>⚠ Conflicting reports</h4><p>${escapeHtml(f.conflictNote)}</p></div>` : ""}
+      ${sustainRows.length ? `<div class="detail-section sustainability-callout"><h4>🌱 Sustainability</h4>${sustainRows.join("")}</div>` : ""}
+      ${investorsHtml ? `<div class="detail-section"><h4>Financial investors</h4>${investorsHtml}</div>` : ""}
       ${partnersHtml ? `<div class="detail-section"><h4>Partners</h4>${partnersHtml}</div>` : ""}
       <div class="detail-section"><h4>Sources</h4>${sourcesHtml}</div>
     `;
@@ -448,7 +655,7 @@
     const marker = state.markersById[id];
     if (marker && state.map) {
       state.map.setView(marker.getLatLng(), Math.max(state.map.getZoom(), 7), { animate: true });
-      if (document.getElementById("btn-view-map").classList.contains("active")) {
+      if (document.getElementById("map-view").classList.contains("active")) {
         state.markerLayer.zoomToShowLayer(marker, () => marker.openPopup());
       }
     }
@@ -461,6 +668,55 @@
     const content = document.getElementById("detail-content");
     content.className = "detail-empty";
     content.innerHTML = `<p>Click any marker or list item to see full details about a facility — operator, capacity, investment, partners, and sources.</p>`;
+  }
+
+  /* ---------------- CSV export ---------------- */
+
+  function csvEscape(val) {
+    const s = val == null ? "" : String(val);
+    if (/[",\n]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+    return s;
+  }
+
+  function toCSV(facilities) {
+    const cols = [
+      "id", "name", "operator", "parentGroup", "city", "state", "lat", "lng",
+      "status", "type", "capacityMW", "gpuCount", "investmentUSD", "investmentDisplay",
+      "announcedDate", "expectedCompletion", "partners", "investors", "sustainability",
+      "conflictNote", "sourceUrls",
+    ];
+    const lines = [cols.join(",")];
+    facilities.forEach((f) => {
+      const row = [
+        f.id, f.name, f.operator, f.parentGroup, f.city, f.state, f.lat, f.lng,
+        f.status, f.type, f.capacityMW, f.gpuCount, f.investmentUSD, f.investmentDisplay,
+        f.announcedDate, f.expectedCompletion,
+        f.partners.join("; "),
+        f.investors.map((i) => `${i.name}${i.amountUSD ? " ($" + i.amountUSD + ")" : ""}`).join("; "),
+        f.sustainability
+          ? Object.entries(f.sustainability)
+              .map(([k, v]) => `${k}: ${v}`)
+              .join("; ")
+          : "",
+        f.conflictNote,
+        f.sources.map((s) => s.url).join("; "),
+      ];
+      lines.push(row.map(csvEscape).join(","));
+    });
+    return lines.join("\n");
+  }
+
+  function downloadCSV(facilities, filename) {
+    const csv = toCSV(facilities);
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
   }
 
   /* ---------------- Utils ---------------- */

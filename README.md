@@ -158,13 +158,41 @@ data/datacenters.json        The dataset — edit this to add/update facilities
 data/changelog.json          Entries shown in the in-app Changelog modal — add one per meaningful update
 scripts/validate-data.js     Schema + sanity validation, run locally and in CI
 .github/workflows/deploy.yml CI validation + GitHub Pages deploy
+vendor/                      Self-hosted Leaflet, Leaflet.markercluster, and Inter — see THIRD-PARTY-NOTICES.md
+LICENSE                      MIT license for the original code (see "Legal" below for the dataset's own terms)
 ```
 
 ## Stack
 
 - [Leaflet](https://leafletjs.com/) + [Leaflet.markercluster](https://github.com/Leaflet/Leaflet.markercluster) for the map (CARTO basemap tiles, OpenStreetMap data)
+- [Inter](https://rsms.me/inter/) typeface
 - Vanilla JS, no framework/build step
 - Plain JSON as the data layer
+
+Leaflet, Leaflet.markercluster, and Inter are all vendored locally under
+`vendor/` (not loaded from a CDN) — this keeps the site fully self-contained,
+avoids sending visitor IPs to a third party on every page load just to fetch
+a font or a library, and keeps it working if a CDN is ever down. See
+[`vendor/THIRD-PARTY-NOTICES.md`](vendor/THIRD-PARTY-NOTICES.md) for each
+library's license. Map tiles are the one thing still fetched live (from
+CARTO), since tile sets are too large to bundle — attributed on-page per
+OpenStreetMap's and CARTO's license terms.
+
+## Legal
+
+- **License**: the original code (HTML/CSS/JS) is MIT-licensed — see
+  [`LICENSE`](LICENSE). The compiled dataset (`data/datacenters.json`,
+  `data/changelog.json`) is released separately with no rights reserved
+  (CC0-equivalent) — reuse it for anything, commercial included; see the
+  in-app "Data & API" panel for details.
+- **Not affiliated**: this is an independently compiled tracker, not
+  affiliated with, endorsed by, or sponsored by any operator, investor, or
+  government body it lists. Company and product names are trademarks of
+  their respective owners, used here only in a descriptive/factual sense.
+- **Not advice**: nothing on this site is investment, financial, or legal
+  advice. Figures are self-reported by operators or estimated by journalists
+  and change often — verify against the linked primary source before relying
+  on any number.
 
 ## Ideas for extending this
 
